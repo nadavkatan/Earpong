@@ -149,42 +149,43 @@ body {
   }
 }
 
-@media all and (max-width: 769) {
+@media all and (min-width: 771px) and (max-width: 1025px) {
+  .instructions-container {
+    width: 80%;
+    right: 6.5em;
+    top: 44em;
+  }
+  .finger {
+    left: 17em;
+    top: 15.5em;
+  }
+  .nadav-avatar {
+    width: 53%;
+  }
+}
+
+@media all and (min-width: 415px) and (max-width: 770px) {
   .buttons-wrapper {
     height: 22vh;
     width: 99vw;
   }
-}
-
-.instructions-container {
-  width: 80%;
-  right: 4.5em;
-  top: 42em;
-}
-
-.top-container {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.top-container .nadav-avatar {
-  margin-top: 2em;
-  width: 58%;
-}
-
-.top-container .finger {
-  left: 13em;
-  top: 12.5em;
-}
-
-.top-container .play-sound {
-  margin-left: 6em;
-  margin-top: 0 !important;
+  .instructions-container {
+    width: 80%;
+    right: 4.5em;
+    top: 39em;
+  }
+  .top-container .nadav-avatar {
+    margin-top: 2em;
+    width: 58%;
+  }
+  .top-container .finger {
+    left: 13em;
+    top: 12.5em;
+  }
+  .top-container .play-sound {
+    margin-left: 6em;
+    margin-top: 0 !important;
+  }
 }
 
 @media all and (min-width: 373px) and (max-width: 415px) {
@@ -196,19 +197,6 @@ body {
     width: 100%;
     right: 0;
     top: 17em;
-  }
-  .top-container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .top-container .nadav-avatar {
-    margin-top: 2em;
-    width: 58%;
   }
   .top-container .finger {
     left: 3em;
@@ -232,15 +220,6 @@ body {
   .top-heading {
     font-size: 2.5em;
   }
-  .top-container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
   .top-container .finger {
     left: 3em;
     top: 15.5em !important;
@@ -248,10 +227,6 @@ body {
   .top-container .play-sound {
     margin-left: 6em;
     margin-top: 0 !important;
-  }
-  .top-container .nadav-avatar {
-    margin-top: 2em;
-    width: 58%;
   }
   .buttons-wrapper {
     height: 18vh;
