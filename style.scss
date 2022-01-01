@@ -110,54 +110,41 @@ transform: scale(1);
 }
 
 
-// @media all and (min-width:770px){
 
-//     .buttons-wrapper{
-//         height: 22vh;
-//         width: 99vw;
-//     }
-// }
-// .instructions-container{
-//     width: 80%;
-//     right: 6.5em;
-//     top:50em;
-// }
-// .top-container{
-//     flex-direction: column;
-//     align-items: center;
-
-//     .nadav-avatar{
-//         margin-top: 2em;
-//         width: 58%;
-//     }
-
-//     .finger{
-//         left: 13em;
-//         top: 12.5em;
-//     }
-//     .play-sound{
-//         margin-left: 6em;
-//         margin-top: 0!important;
-//     }
-// }
+@media all and (min-width:771px) and (max-width: 1025px){
 
 
-@media all and (max-width:769){
+    .instructions-container{
+        width: 80%;
+        right:6.5em;
+        top:44em;
+    }
+
+    .finger{
+        left: 17em;
+        top: 15.5em;
+    }
+    .nadav-avatar{
+                width: 53%;
+            }
+}
+
+
+
+
+@media all and (min-width: 415px) and (max-width:770px){
 
     .buttons-wrapper{
         height: 22vh;
         width: 99vw;
     }
-}
+
 .instructions-container{
     width: 80%;
     right:4.5em;
-    top:42em;
+    top:39em;
 }
 .top-container{
-    flex-direction: column;
-    align-items: center;
-
     .nadav-avatar{
         margin-top: 2em;
         width: 58%;
@@ -172,6 +159,7 @@ transform: scale(1);
         margin-top: 0!important;
     }
 }
+}
 
 @media all and (min-width: 373px) and (max-width:415px){
 
@@ -184,14 +172,7 @@ transform: scale(1);
     right:0;
     top:17em;
 }
-.top-container{
-    flex-direction: column;
-    align-items: center;
-
-    .nadav-avatar{
-        margin-top: 2em;
-        width: 58%;
-    }
+.top-container{  
 
     .finger{
         left: 3em;
@@ -219,9 +200,6 @@ transform: scale(1);
     }
 
     .top-container{
-        flex-direction: column;
-        align-items: center;
-
         .finger{
             left: 3em;
             top: 15.5em!important;
@@ -230,10 +208,7 @@ transform: scale(1);
             margin-left: 6em;
             margin-top: 0!important;
         }
-        .nadav-avatar{
-            margin-top: 2em;
-            width: 58%;
-        }
+
     }
 
     .buttons-wrapper{
@@ -242,33 +217,3 @@ transform: scale(1);
 }
 
 
-// @media all and (max-width:769){
-
-//     .buttons-wrapper{
-//         height: 22vh;
-//         width: 99vw;
-//     }
-// }
-// .instructions-container{
-//     width: 80%;
-//     right:4.5em;
-//     top:38em;
-// }
-// .top-container{
-//     flex-direction: column;
-//     align-items: center;
-
-//     .nadav-avatar{
-//         margin-top: 2em;
-//         width: 58%;
-//     }
-
-//     .finger{
-//         left: 13em;
-//         top: 12.5em;
-//     }
-//     .play-sound{
-//         margin-left: 6em;
-//         margin-top: 0!important;
-//     }
-// }
