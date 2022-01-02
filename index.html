@@ -9,8 +9,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="top-heading text-center mt-3">Let's play EARPONG!</h1>
-    <div class="top-container container row justify-content-center mt-5">
+    <div class="top-heading-container row">
+        <div class="languages-container col-1">
+            <button class='dutch btn'>Nederlands</button>
+            <button class="english btn">English</button>
+            <button class='hebrew btn'>Hebrew</button>
+        </div>
+        <h1 class="top-heading text-center mt-3 col-11">Let's play EARPONG!</h1>
+        
+    </div>
+    <div class="top-container container row justify-content-center mt-5 flex-column flex-xxl-row align-items-center align-items-xxl-start">
         <div class="instructions-container col-6 d-flex flex-column align-items-center">
             <p class="instructions text-center text-white">
                 Welcome to EARPONG! <br>
@@ -22,6 +30,8 @@
                 Are you ready?!
             </p>
             <p class="choose-sounds-language text-white text-center d-none">Are you an 'A B C' or 'Do Re Mi' kind of musician?</p>
+            <p class="amount-of-sounds d-none text-white text-center">How many sounds would you like your practice to consist?</p>
+            <div class="sound-buttons-container d-none"></div>
             <p class="c-reference d-none text-white text-center">I will now play the note <span class="do-or-c"></span> for you to have a reference <br>
             Then, once your ready, click 'Start training'.
             </p>
@@ -36,7 +46,6 @@
     <h3 class="score-display text-end mb-3"></h3>
     <img class="finger d-none" src="images/finger.png" alt="">
     <button class="play-sound btn btn-violet col-6 mt-5">Start training!</button>
-    <!-- <button class='dutch btn'>Nederlands</button> -->
     <img class="nadav-avatar col-6" src="images/neutral.png" alt="avatar">
 </div>
     <audio class="audio-ping" src=""></audio>
