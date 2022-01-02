@@ -16,20 +16,26 @@ const playC = document.querySelector('.c-reference');
 const closeInstructions = document.querySelector('.close-instructions');
 const instructionContainer = document.querySelector('.instructions-container');
 const pointingFinger = document.querySelector('.finger');
-const changeToDutch = document.querySelectorAll('.dutch');
+const changeToDutch = document.querySelector('.dutch');
+const changeToEnglish = document.querySelector('.english');
+const changeToHebrew = document.querySelector('.hebrew');
+const amountOfSoundsBtnContainer = document.querySelector('.sound-buttons-container');
+const amountOfSoundsFromUser = document.querySelector('.amount-of-sounds');
+let amountOfSounds = 3;
+let amountOfSoundsButtonElements = [];
 let sounds = ['c','d','e','f','g','a', 'b'];
 let soundsIt = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
+let soundsHeb = ['סי', 'לה', 'סול', 'פה' , 'מי' , 'רה' , 'דו'];
 let selectedSoundLang=[];
 let soundButtons = [];
 let randomSound = sounds[Math.floor(Math.random()*7)];
+let cOrDo = 'C';
 score = 0;
 questionsCounter = 0;
 scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCounter}`;
 
-// changeToDutch.addEventListener('click', function(){
-//     console.log('clicked');
-//     });
 
+//Declaring a function to create the buttons. To be called later
 function createSoundButtons(selectedSounds){
     for(let i=0; i<selectedSounds.length; i++){
         let soundBtn = document.createElement('button');
@@ -49,18 +55,22 @@ gotItBtn.addEventListener('click', ()=>{
     chooseSoundsLang.classList.add('d-block');
     chooseSoundsLangContainer.classList.remove('d-none');
     chooseSoundsLangContainer.classList.add('d-block');
+});
 
-    // declaring a slide transition to prevet code repeats
-    function nextInstruction(){
-        chooseSoundsLang.classList.remove('d-block');
-        chooseSoundsLang.classList.add('d-none');
-        chooseSoundsLangContainer.classList.remove('d-block');
-        chooseSoundsLangContainer.classList.add('d-none');
-        playC.classList.remove('d-none');
-        playC.classList.add('d-block');
-        closeInstructions.classList.remove('d-none');
-        closeInstructions.classList.add('d-block');
-    }
+
+ // declaring a slide transition to prevet code repeats. Proceeding from sound language choice to number of sounds choice
+ function nextInstruction(){
+     chooseSoundsLang.classList.remove('d-block');
+     chooseSoundsLang.classList.add('d-none');
+     chooseSoundsLangContainer.classList.remove('d-block');
+     chooseSoundsLangContainer.classList.add('d-none');
+     amountOfSoundsBtnContainer.classList.remove('d-none');
+     amountOfSoundsBtnContainer.classList.add('d-block');
+     amountOfSoundsFromUser.classList.remove('d-none');
+     amountOfSoundsFromUser.classList.add('d-block');
+     createSoundChoiceButtons();
+ }
+
 
 // If user chooses 'ABC' - create ABC buttons and change dynamic text in play C section
 chooseABC.addEventListener('click', ()=>{
@@ -68,8 +78,6 @@ chooseABC.addEventListener('click', ()=>{
     selectedSoundLang = sounds;
     doOrC[0].textContent="'C'";
     doOrC[1].textContent="'C'";
-    createSoundButtons(selectedSoundLang);
-
 });
 
 // If user chooses 'DoReMi' - create DoReMi buttons and change dynamic text in play C section
@@ -78,18 +86,50 @@ chooseDoReMi.addEventListener('click', ()=>{
     selectedSoundLang = soundsIt;
     doOrC[0].textContent="'Do'";
     doOrC[1].textContent="'Do'";
-    createSoundButtons(selectedSoundLang);
 });
 
+// Create buttons with numbers for the user to choose how many sounds should the training contain
+function createSoundChoiceButtons(){
+    
+    //Create the buttons
+    for(let i=0; i < 5; i++){
+        const btn = document.createElement('button');
+        btn.classList.add('btn', 'btn-warning', 'mx-2');
+        btn.setAttribute('id', `amount-of-sounds-btn-${amountOfSounds}`);
+        btn.textContent = amountOfSounds;
+        amountOfSoundsButtonElements.push(btn);
+        amountOfSoundsBtnContainer.appendChild(btn);
+        
+        //Add event listeners to the buttons and modifying the sounds array according to the selected button
+        amountOfSoundsButtonElements[i].addEventListener('click', ()=>{
+            for(let j=0; j< 7- Number(btn.textContent); j++){
+                selectedSoundLang.pop();
+            } 
+        
+        //Proceeding to the next slide of the instructions - play C/Do
+        amountOfSoundsBtnContainer.remove();
+        createSoundButtons(selectedSoundLang);
+        amountOfSoundsFromUser.classList.remove('d-block');
+        amountOfSoundsFromUser.classList.add('d-none');
+        playC.classList.remove('d-none');
+        playC.classList.add('d-block');
+        closeInstructions.classList.remove('d-none');
+        closeInstructions.classList.add('d-block');
+        });
 
+        //Counter for the button id and text content
+        amountOfSounds++;
+    }
 
-// PLay C/Do and initialize training
+}
+
+// Play C/Do and initialize training
 closeInstructions.addEventListener('click', ()=>{
     audioPing.src= 'music/c.mp3';
     audioPing.play();
     setTimeout(initializeTraining, 2000);
 });
-});
+// });
 
 
 //Close instructions container and point to strat training btn
@@ -116,7 +156,7 @@ function playRandomSound(){
     document.addEventListener('keydown', control);
 
     //Generate random sound
-    let randomSound = selectedSoundLang[Math.floor(Math.random()*7)];
+    let randomSound = selectedSoundLang[Math.floor(Math.random()*selectedSoundLang.length)];
     console.log(randomSound);
 
     // set default avatar
@@ -272,4 +312,45 @@ function checkKeyAnswer(answer){
     setTimeout(playRandomSound, 1000);
 }
 
+  //Translate to Dutch
+  changeToDutch.addEventListener('click', function(){
+    playSound.textContent = "Begin oefening";
+    instructions.innerHTML = `Welkom bij EARPONG! <br>
+    Ik ben Nadav, jouw virtuele ear-training meester 🤓 <br>
+    In deze oefening, ga ik een noot voor je spelen, en jij moet heel goed luisteren en de noot proberen te herkenen. <br>
+    Als jij weet welke noot ik heb gespeeld, druk dan het knopje met de juiste naam op. <br>
+    Ben je er klaar voor?!`;
+    gotItBtn.textContent = "Snap ik!";
+    chooseSoundsLang.textContent = "Zullen we 'ABC' of 'Do-Re-Mi gebruiken?";
+    playC.innerHTML = `Nu, luister maar heel goed, de eerste noot die ik ga spelen is: `;
+    });
 
+//Translate back to English from Dutch
+changeToEnglish.addEventListener('click', function(){
+    playSound.textContent = "Start training";
+    instructions.innerHTML = `Welcome to EARPONG! <br>
+    I'm Nadav! your virtual ear-training teacher 🤓 <br>
+    Our training will work like this: <br>
+    I will play a sound, and you have to recognize which sound I have played. <br>
+    When you think you know which sound I played, either simply press the button <br>
+    with the name of sound on it, or use the keyboard keys! <br>
+    Are you ready?!`;
+    gotItBtn.textContent = "Got it!";
+    chooseSoundsLang.textContent = "Are you an 'A B C' or 'Do Re Mi' kind of musician?";
+    playC.innerHTML = `I will now play the note ${cOrDo} for you to have a reference `;
+    });
+
+  
+        // changeToHebrew.addEventListener('click', function(){
+        //     playSound.textContent = "!בוא נתחיל";
+        //     instructions.innerHTML = `Earpong ברוך הבא ל <br>
+        //     <br> 🤓 אני נדב, המורה הוירטואלי שלך לפיתוח שמיעה
+        //     <br> האימון שלנו הולך לעבוד כך: אני אנגן צליל, ועליך יהיה לזהות את הצליל
+            
+        //     `;
+
+        //     gotItBtn.textContent = "Snap ik!";
+        //     chooseSoundsLang.remove();
+        //     playC.innerHTML = `Nu, luister maar heel goed, de eerste noot dat ik ga spelen is: `;
+        //     createSoundButtons(soundsHeb);
+        //     });
