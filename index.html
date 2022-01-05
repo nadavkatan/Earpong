@@ -9,50 +9,57 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-heading-container row">
-        <div class="languages-container col-1">
-            <button class='dutch btn'>Nederlands</button>
-            <button class="english btn">English</button>
-<!--             <button class='hebrew btn'>Hebrew</button> -->
-        </div>
-        <h1 class="top-heading text-center mt-3 col-11">Let's play EARPONG!</h1>
-        
+
+    <div class="languages-container col-1">
+        <button class='dutch btn'>Nederlands</button>
+        <button class="english btn">English</button>
+        <!-- <button class='hebrew btn'>Hebrew</button> -->
     </div>
-    <div class="top-container container row justify-content-center mt-5 flex-column flex-xxl-row align-items-center align-items-xxl-start">
-        <div class="instructions-container col-6 d-flex flex-column align-items-center">
-            <p class="instructions text-center text-white">
-                Welcome to EARPONG! <br>
-                I'm Nadav! your virtual ear-training teacher 🤓 <br>
-                Our training will work like this: <br>
-                I will play a sound, and you have to recognize which sound I have played. <br>
-                When you think you know which sound I played, either simply press the button <br>
-                with the name of sound on it, or use the keyboard keys! <br>
-                Are you ready?!
-            </p>
-            <p class="choose-sounds-language text-white text-center d-none">Are you an 'A B C' or 'Do Re Mi' kind of musician?</p>
-            <p class="amount-of-sounds d-none text-white text-center">How many sounds would you like your practice to consist?</p>
-            <div class="sound-buttons-container d-none"></div>
-            <p class="c-reference d-none text-white text-center">I will now play the note <span class="do-or-c"></span> for you to have a reference <br>
-            Then, once your ready, click 'Start training'.
-            </p>
-            <button class="got-it-btn btn btn-warning w-50 ">Got it!</button>
-            <div class="choose-sounds-language-container d-none">
-            <button class="abc btn btn-warning">A B C</button>
-            <button class="do-re-mi btn btn-warning mx-3">Do Re Mi</button>
+   
+    <div class="top-container  row justify-content-end flex-column align-items-end mt-5 ">
+        <div class="top-heading-container row">
+
+            <h1 class="top-heading text-center col-12 flex-column">Let's play EARPONG!</h1>
+            <div class="buttons-wrapper d-flex flex-column align-items-center justify-content-start">
+                <h3 class="score-display mb-3"></h3>
+                <div class="buttons-container"></div>
+                <div class="start-training-container">
+                <button class="play-sound btn btn-violet mt-4 d-none">Start training!</button>
+                <img class="finger d-none" src="images/finger.png" alt="">
+            </div>
+            </div>
         </div>
-            <button class="close-instructions btn btn-warning w-50 d-none ">Play <span class="do-or-c"></span>!</button>
-        </div>
-        
-    <h3 class="score-display text-end mb-3"></h3>
-    <img class="finger d-none" src="images/finger.png" alt="">
-    <button class="play-sound btn btn-violet col-6 mt-5">Start training!</button>
+</div>
+
+<div class="instructions-and-nadav row d-flex">
     <img class="nadav-avatar col-6" src="images/neutral.png" alt="avatar">
+    <div class="instructions-container col-6 d-flex flex-column align-items-center justify-content-center">
+        <p class="instructions text-center text-white">
+            Welcome to EARPONG! <br>
+            I'm Nadav! your virtual ear-training teacher 🤓 <br>
+            Our training will work like this: <br>
+            I will play a sound, and you have to recognize which sound I have played. 
+            When you think you know which sound I played,<br> simply press the button 
+            with the name of sound on it! <br>
+            Are you ready?!
+        </p>
+        <p class="choose-sounds-language text-center text-white d-none">Are you an 'A B C' or 'Do Re Mi' kind of musician?</p>
+        <p class="amount-of-sounds d-none text-center text-white">How many sounds would you like your practice to consist?</p>
+        <div class="sound-buttons-container d-none"></div>
+        <p class="c-reference d-none text-center text-white">I will now play the note <span class="do-or-c"></span> for you to have a reference <br>
+        Then, once your ready, click 'Start training'.
+        </p>
+        <button class="got-it-btn btn btn-warning w-50 ">Got it!</button>
+        <div class="choose-sounds-language-container d-none">
+        <button class="abc btn btn-warning">A B C</button>
+        <button class="do-re-mi btn btn-warning mx-3">Do Re Mi</button>
+    </div>
+        <button class="close-instructions btn btn-warning w-50 d-none ">Play <span class="do-or-c"></span>!</button>
+    </div>
 </div>
     <audio class="audio-ping" src=""></audio>
     <audio class="audio-pong" src=""></audio>
-    <div class="buttons-wrapper">
-    <div class="buttons-container"></div>
-</div>
+
 </body>
 <script src="app.js"></script>
 </html>
