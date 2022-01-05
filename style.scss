@@ -44,6 +44,7 @@ body {
             }
 
             .buttons-container {
+                z-index: 1;
                 .btn-blue {
                     background-color: #396EB0;
                     color: white;
@@ -99,6 +100,7 @@ body {
     .nadav-avatar {
         width: 35%;
         margin-top: -6em;
+        z-index: 0;
     }
 
     .instructions-container {
