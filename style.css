@@ -9,12 +9,31 @@ html {
 
 body {
   font-family: 'South Park', 'Gloria Hallelujah', sans-serif;
-  background-color: #FFFCDC;
-  background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.png");
+  background-image: url("/images/classroom.jpeg");
+  background-size: cover;
+  background-position: 50% 60%;
+  overflow: hidden;
 }
 
-.buttons-wrapper {
-  height: 20vh;
+.languages-container {
+  margin-bottom: 6em;
+}
+
+.languages-container .english,
+.languages-container .dutch {
+  font-size: 0.7em;
+}
+
+.top-container {
+  margin-right: 3em;
+}
+
+.top-container .top-heading-container .top-heading {
+  margin-top: 0.5em;
+}
+
+.top-container .top-heading-container .buttons-wrapper {
+  height: 15vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -26,67 +45,70 @@ body {
           justify-content: center;
 }
 
-.top-heading {
-  font-size: 4em;
-}
-
-.score-display {
+.top-container .top-heading-container .buttons-wrapper .score-display {
   font-size: 1em;
 }
 
-.nadav-avatar {
-  width: 35%;
-}
-
-.play-sound {
-  width: 11em;
-  height: 4em;
-  font-size: 1em;
-}
-
-.btn-blue {
+.top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
   background-color: #396EB0;
   color: white;
   -webkit-box-shadow: 0 0 2px #396EB0;
           box-shadow: 0 0 2px #396EB0;
 }
 
-.btn-blue:hover {
+.top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue:hover {
   opacity: 80%;
   color: white;
 }
 
-.btn-violet {
-  background-color: #DADDFC;
-  -webkit-box-shadow: 0 0 2px #396EB0;
-          box-shadow: 0 0 2px #396EB0;
+.top-container .top-heading-container .buttons-wrapper .start-training-container {
+  position: relative;
+  z-index: 0;
+  margin-top: 2em;
 }
 
-.scale-btn:hover {
+.top-container .top-heading-container .buttons-wrapper .start-training-container .play-sound {
+  width: 11em;
+  height: 3em;
+  font-size: 1em;
+  margin-left: 7em;
+}
+
+.top-container .top-heading-container .buttons-wrapper .start-training-container .scale-btn:hover {
   opacity: 80%;
   -webkit-animation: scale 0.5s;
           animation: scale 0.5s;
 }
 
-.instructions-container {
-  position: absolute;
-  padding: 2em;
-  background-color: #396EB0;
-  width: 25%;
-  border-radius: 10px;
-  right: 7em;
-  top: 13em;
-  -webkit-box-shadow: 0 0 10px lightblue;
-          box-shadow: 0 0 10px lightblue;
+.top-container .top-heading-container .buttons-wrapper .start-training-container .btn-violet {
+  background-color: #DADDFC;
+  -webkit-box-shadow: 0 0 2px #396EB0;
+          box-shadow: 0 0 2px #396EB0;
 }
 
-.finger {
+.top-container .top-heading-container .buttons-wrapper .start-training-container .finger {
   position: absolute;
   width: 7em;
-  left: 14.5em;
-  top: 15.5em;
+  top: 2.5em;
   -webkit-animation: translateFinger 1s infinite;
           animation: translateFinger 1s infinite;
+}
+
+.instructions-and-nadav .nadav-avatar {
+  width: 35%;
+  margin-top: -6em;
+}
+
+.instructions-and-nadav .instructions-container {
+  z-index: 2;
+  padding: 1em;
+  background-color: #396EB0;
+  margin-left: 2em;
+  width: 25%;
+  height: 20%;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 10px lightblue;
+          box-shadow: 0 0 10px lightblue;
 }
 
 @-webkit-keyframes translateFinger {
@@ -149,86 +171,266 @@ body {
   }
 }
 
-@media all and (min-width: 771px) and (max-width: 1025px) {
-  .instructions-container {
-    width: 80%;
-    right: 6.5em;
-    top: 44em;
+@media screen and (min-width: 771px) and (max-width: 1025px) {
+  .instructions-and-nadav {
+    margin-top: -6em;
   }
-  .finger {
-    left: 17em;
-    top: 15.5em;
+  .instructions-and-nadav .instructions-container {
+    width: 38%;
   }
-  .nadav-avatar {
-    width: 53%;
+  .instructions-and-nadav .instructions-container .instructions {
+    font-size: 1.5em;
   }
-}
-
-@media all and (min-width: 415px) and (max-width: 770px) {
-  .buttons-wrapper {
+  .instructions-and-nadav .nadav-avatar {
+    margin-left: -3em;
+    width: 56%;
+    margin-top: 0.2em;
+  }
+  .top-container .top-heading-container .top-heading {
+    margin-top: 3.2em;
+    font-size: 4.6em;
+  }
+  .top-container .top-heading-container .buttons-wrapper {
     height: 22vh;
     width: 99vw;
   }
-  .instructions-container {
-    width: 80%;
+  .top-container .top-heading-container .buttons-wrapper .buttons-container {
+    margin-top: 2.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .buttons-container .btn {
+    font-size: 2em !important;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container {
+    margin-top: 6em;
+    margin-left: 19em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .finger {
+    top: 2em;
+    left: 2em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .play-sound {
+    margin-left: 6em;
+    margin-top: 0 !important;
+    font-size: 1.5em !important;
+  }
+}
+
+@media all and (min-width: 416px) and (max-width: 770px) {
+  .instructions-and-nadav {
+    margin-top: -2em;
+  }
+  .instructions-and-nadav .instructions-container {
+    width: 38%;
     right: 4.5em;
-    top: 39em;
+    top: 43em;
   }
-  .top-container .nadav-avatar {
-    margin-top: 2em;
-    width: 58%;
+  .instructions-and-nadav .nadav-avatar {
+    margin-left: -3em;
+    width: 56%;
   }
-  .top-container .finger {
-    left: 13em;
-    top: 12.5em;
+  .top-container .top-heading-container .top-heading {
+    margin-top: 3em;
+    font-size: 3em;
   }
-  .top-container .play-sound {
-    margin-left: 6em;
-    margin-top: 0 !important;
-  }
-}
-
-@media all and (min-width: 373px) and (max-width: 415px) {
-  .buttons-wrapper {
+  .top-container .top-heading-container .buttons-wrapper {
     height: 22vh;
     width: 99vw;
   }
-  .instructions-container {
-    width: 100%;
-    right: 0;
-    top: 17em;
+  .top-container .top-heading-container .buttons-wrapper .buttons-container {
+    margin-top: 1.5em;
   }
-  .top-container .finger {
-    left: 3em;
-    top: 13.5em;
+  .top-container .top-heading-container .buttons-wrapper .start-training-container {
+    margin-top: 3em;
+    margin-left: 18em;
   }
-  .top-container .play-sound {
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .finger {
+    top: 1em;
+    left: -1em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .play-sound {
     margin-left: 6em;
     margin-top: 0 !important;
-  }
-  .top-heading {
-    font-size: 2.5em;
   }
 }
 
-@media all and (max-width: 375px) {
-  .instructions-container {
-    width: 100%;
-    right: 0;
-    top: 9em !important;
+@media all and (min-width: 376px) and (max-width: 415px) {
+  .top-container .top-heading-container .top-heading {
+    font-size: 1.5em;
+    margin-top: 2.5em;
   }
-  .top-heading {
-    font-size: 2.5em;
+  .top-container .top-heading-container .buttons-wrapper .score-display {
+    font-size: 0.5em;
   }
-  .top-container .finger {
-    left: 3em;
-    top: 15.5em !important;
+  .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
+    font-size: 0.5em;
   }
-  .top-container .play-sound {
-    margin-left: 6em;
+  .top-container .top-heading-container .start-training-container {
     margin-top: 0 !important;
   }
-  .buttons-wrapper {
-    height: 18vh;
+  .top-container .top-heading-container .start-training-container .finger {
+    left: 1.5em;
+    top: 4em !important;
+  }
+  .top-container .top-heading-container .start-training-container .play-sound {
+    margin-left: 9em !important;
+    margin-top: 3em !important;
+  }
+  .instructions-and-nadav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .instructions-and-nadav .instructions-container {
+    margin-left: 0;
+    margin-top: -27em;
+    width: 90%;
+  }
+  .instructions-and-nadav .nadav-avatar {
+    margin-top: 5em;
+    width: 70%;
   }
 }
+
+@media all and (min-width: 362px) and (max-width: 376px) {
+  .top-container .top-heading-container .top-heading {
+    font-size: 1.5em;
+    margin-top: 1.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .score-display {
+    font-size: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
+    font-size: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container {
+    margin-top: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .finger {
+    left: 1.5em;
+    top: 3em !important;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .play-sound {
+    margin-left: 8em;
+  }
+  .instructions-and-nadav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .instructions-and-nadav .instructions-container {
+    margin-left: 0;
+    margin-top: -25em;
+    width: 90%;
+  }
+  .instructions-and-nadav .nadav-avatar {
+    margin-top: 5em;
+    width: 70%;
+  }
+}
+
+@media all and (min-width: 321px) and (max-width: 361px) {
+  .top-container .top-heading-container .top-heading {
+    font-size: 1.5em;
+    margin-top: 1.5em !important;
+  }
+  .top-container .top-heading-container .buttons-wrapper .score-display {
+    font-size: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
+    font-size: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container {
+    margin: 0;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .finger {
+    left: 1.5em;
+    top: 3em !important;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .play-sound {
+    margin-left: 9em;
+  }
+  .instructions-and-nadav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .instructions-and-nadav .instructions-container {
+    margin-left: 0.5em;
+    margin-top: -24em;
+    width: 90%;
+  }
+  .instructions-and-nadav .nadav-avatar {
+    margin-top: 5em;
+    width: 70%;
+  }
+}
+
+@media all and (min-width: 10px) and (max-width: 320px) {
+  .top-container .top-heading-container .top-heading {
+    font-size: 1em !important;
+    margin-top: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .score-display {
+    font-size: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .buttons-container {
+    width: 20em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
+    font-size: 0.5em;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container {
+    margin-top: 0 !important;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .finger {
+    left: 1.5em;
+    top: 2em !important;
+  }
+  .top-container .top-heading-container .buttons-wrapper .start-training-container .play-sound {
+    margin-left: 7em;
+    margin-top: 1em !important;
+  }
+  .instructions-and-nadav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .instructions-and-nadav .instructions-container {
+    margin-left: 0;
+    margin-top: -26em;
+    width: 90%;
+  }
+  .instructions-and-nadav .nadav-avatar {
+    margin-top: 5em;
+    width: 70%;
+  }
+}
+
