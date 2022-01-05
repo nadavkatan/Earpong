@@ -49,6 +49,10 @@ body {
   font-size: 1em;
 }
 
+.top-container .top-heading-container .buttons-wrapper .buttons-container {
+  z-index: 1;
+}
+
 .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
   background-color: #396EB0;
   color: white;
@@ -97,6 +101,7 @@ body {
 .instructions-and-nadav .nadav-avatar {
   width: 35%;
   margin-top: -6em;
+  z-index: 0;
 }
 
 .instructions-and-nadav .instructions-container {
@@ -433,4 +438,3 @@ body {
     width: 70%;
   }
 }
-
