@@ -127,6 +127,8 @@ function createSoundChoiceButtons(){
 closeInstructions.addEventListener('click', ()=>{
     audioPing.src= 'music/c.mp3';
     audioPing.play();
+    playSound.classList.remove('d-none');
+    playSound.classList.add('d-block');
     setTimeout(initializeTraining, 2000);
 });
 // });
@@ -150,6 +152,8 @@ function playRandomSound(){
     //remove pointing finger
     pointingFinger.classList.remove('d-block');
     pointingFinger.classList.add('d-none');
+    playSound.classList.remove('d-block');
+    playSound.classList.add('d-none');
 
     //Event listeners for buttons and keys are initialized only after 'start training' btn was pressed
     createEventListeners();
