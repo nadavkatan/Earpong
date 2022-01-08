@@ -22,14 +22,19 @@ const changeToHebrew = document.querySelector('.hebrew');
 const amountOfSoundsBtnContainer = document.querySelector('.sound-buttons-container');
 const amountOfSoundsFromUser = document.querySelector('.amount-of-sounds');
 let amountOfSounds = 3;
+let amountOfChromaticSounds = 1;
+let chromaticSelected = false;
 let amountOfSoundsButtonElements = [];
 let sounds = ['c','d','e','f','g','a', 'b'];
 let soundsIt = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
 let soundsHeb = ['סי', 'לה', 'סול', 'פה' , 'מי' , 'רה' , 'דו'];
+let chromaticABC = ['a', 'a+', 'b','c','c+' ,'d','d+','e','f', 'f+','g', 'g+'];
+let chromaticDoReMo = ['do','do+', 're', 're+', 'mi', 'fa', 'fa+', 'sol', 'sol+', 'la', 'la+', 'si'];
 let selectedSoundLang=[];
 let soundButtons = [];
 let randomSound = sounds[Math.floor(Math.random()*7)];
 let cOrDo = 'C';
+let answer;
 score = 0;
 questionsCounter = 0;
 scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCounter}`;
@@ -65,7 +70,7 @@ gotItBtn.addEventListener('click', ()=>{
      chooseSoundsLangContainer.classList.remove('d-block');
      chooseSoundsLangContainer.classList.add('d-none');
      amountOfSoundsBtnContainer.classList.remove('d-none');
-     amountOfSoundsBtnContainer.classList.add('d-block');
+     amountOfSoundsBtnContainer.classList.add('d-flex', 'flex-wrap', 'justify-content-center');
      amountOfSoundsFromUser.classList.remove('d-none');
      amountOfSoundsFromUser.classList.add('d-block');
      createSoundChoiceButtons();
@@ -94,7 +99,7 @@ function createSoundChoiceButtons(){
     //Create the buttons
     for(let i=0; i < 5; i++){
         const btn = document.createElement('button');
-        btn.classList.add('btn', 'btn-warning', 'mx-2');
+        btn.classList.add('btn', 'btn-warning', 'mx-2', 'my-2');
         btn.setAttribute('id', `amount-of-sounds-btn-${amountOfSounds}`);
         btn.textContent = amountOfSounds;
         amountOfSoundsButtonElements.push(btn);
@@ -121,6 +126,41 @@ function createSoundChoiceButtons(){
         amountOfSounds++;
     }
 
+    let chromaticOptionBtn = document.createElement('button');
+    chromaticOptionBtn.classList.add('btn', 'btn-warning', 'mx-2');
+    chromaticOptionBtn.textContent = 'Chromatic';
+    amountOfSoundsBtnContainer.appendChild(chromaticOptionBtn);
+
+    chromaticOptionBtn.addEventListener('click', ()=>{
+        amountOfSoundsBtnContainer.remove();
+        amountOfSoundsFromUser.classList.remove('d-block');
+        amountOfSoundsFromUser.classList.add('d-none');
+        playC.classList.remove('d-none');
+        playC.classList.add('d-block');
+        closeInstructions.classList.remove('d-none');
+        closeInstructions.classList.add('d-block');
+
+        if(selectedSoundLang.includes('do')){
+            createSoundButtons(chromaticDoReMo);
+        }else{
+            createSoundButtons(chromaticABC);
+        }
+        chromaticSelected = true;
+    });
+}
+
+
+function createChromaticButtons(selectedChromaticButtons){
+    for(let i=0; i<selectedChromaticButtons.length; i++){
+        const btn = document.createElement('button');
+        btn.classList.add('btn', 'btn-warning', 'mx-2');
+        btn.setAttribute('id', `amount-of-sounds-btn-${amountOfChromaticSounds}`);
+        btn.textContent = amountOfSounds;
+        amountOfSoundsButtonElements.push(btn);
+        amountOfSoundsBtnContainer.appendChild(btn);
+        
+        
+    }
 }
 
 // Play C/Do and initialize training
@@ -160,8 +200,25 @@ function playRandomSound(){
     document.addEventListener('keydown', control);
 
     //Generate random sound
-    let randomSound = selectedSoundLang[Math.floor(Math.random()*selectedSoundLang.length)];
-    console.log(randomSound);
+    let randomSound;
+
+    // Check if the chromatic option was selected
+    if(chromaticSelected){
+        //Check if the DoReMi chromatic option was selected
+        if(selectedSoundLang.includes('do')){
+            randomSound = chromaticDoReMo[Math.floor(Math.random()*chromaticDoReMo.length)];
+            console.log(randomSound);
+            //If not, it must be the ABC Chromatic option that was selected
+        }else{
+            randomSound = chromaticABC[Math.floor(Math.random()*chromaticABC.length)];
+            console.log(randomSound);
+        }
+
+        //If a chromatic option was not selected, create diatonic sounds
+    }else{
+         randomSound = selectedSoundLang[Math.floor(Math.random()*selectedSoundLang.length)];
+        console.log(randomSound);
+    }
 
     // set default avatar
     teacher.src = 'images/neutral.png';
@@ -186,45 +243,91 @@ function createEventListeners(){
     for(let i=0; i< soundButtons.length; i++){
         soundButtons[i].addEventListener('click', checkBtnAnswer);
     }
-
 }
 
 // Check user's answer submitted from buttons
 function checkBtnAnswer(e){
+     answer = e.target.innerText;
+
+    if(chromaticSelected){
+         getPlayedSoundChromatic();
+    }else{
+        getPlayedSoundDiatonic();
+    }
+    //After 1 second play another random sound
+    setTimeout(playRandomSound, 1000);
+}
+
+
+//Get played sound if chromaticSelected = true //
+function getPlayedSoundChromatic(){
     let audioPingSplit = audioPing.src.split("");
-    
+    console.log(audioPingSplit);
     // clone audioPingSplit to splice it for 'sol' without modifying original
     let audioPingSplitClone = [...audioPingSplit];
-
+    let audioPingSplitClone2 = [...audioPingSplit];
     //Splicing for sol
     let sol = audioPingSplitClone.splice(audioPingSplitClone.length -7, 3).join("");
 
-    //Check whether user selected 'ABC'
-    if(selectedSoundLang == sounds){
-
-    //Get and parse the source of the played sound
-    var playedSound = audioPingSplit.splice(audioPingSplit.length -5, 1).join("");
-    }
-    
-    //Check if user selected 'DoReMi'
-    else if( selectedSoundLang == soundsIt){
-        let audioPingSplit = audioPing.src.split("");
-
-        //Check if sol was played (sol is treated differently due to different char count (3 vs 2))
+    if(selectedSoundLang.includes('do')){
+        // let audioPingSplit = audioPing.src.split("");
+        let solSharp = audioPingSplitClone2.splice(audioPingSplitClone2.length -8, 4).join("");
+        //Check if diatonic sol
         if(sol == 'sol'){
             var playedSound = 'sol';
+        //Check if chromatic sol
+        }else if(solSharp=='sol+'){
+            var playedSound = 'sol+';
+        //Check if chromatic but not sol
+        }else if(audioPingSplit.includes('+')){
+            var playedSound = audioPingSplit.splice(audioPingSplit.length -7, 3).join("");
+        //check if diatonic but not sol
         }else{
-
-            //If any other sounds was played
             var playedSound = audioPingSplit.splice(audioPingSplit.length -6, 2).join("");
         }
+        //If selected language is not DoReMi, it's ABC. Get played sound.
+    }else{
+        if(audioPingSplit.includes('+')){
+            var playedSound = audioPingSplit.splice(audioPingSplit.length -6, 2).join("");
+        }else{
+            var playedSound = audioPingSplit.splice(audioPingSplit.length -5, 1).join("");
+        }
     }
+    //Check if the played sound matches with the user's answer
+    matchAnswerToPlayedSound(playedSound);
+};
 
-    //Get the user's answer
-    let answer = e.target.innerText;
-    let correspondingBtn = document.getElementById(answer);
+//Get played sound if chromaticSelected = false //
+function getPlayedSoundDiatonic(){
+    let audioPingSplit = audioPing.src.split("");
+    console.log(audioPingSplit);
+    // clone audioPingSplit to splice it for 'sol' without modifying original
+    let audioPingSplitClone = [...audioPingSplit];
+    //Splicing for sol
+    let sol = audioPingSplitClone.splice(audioPingSplitClone.length -7, 3).join("");
+     //Check whether user selected 'ABC'
+     if(selectedSoundLang == sounds){
+        //Get and parse the source of the played sound
+        var playedSound = audioPingSplit.splice(audioPingSplit.length -5, 1).join("");
+        }
+        //Check if user selected 'DoReMi'
+        else if( selectedSoundLang == soundsIt){
+            let audioPingSplit = audioPing.src.split("");
+            //Check if sol was played (sol is treated differently due to different char count (3 vs 2))
+            if(sol == 'sol'){
+                var playedSound = 'sol';
+            }else{
+                //If any other sounds was played
+                var playedSound = audioPingSplit.splice(audioPingSplit.length -6, 2).join("");
+            }
+        }
+        //Check if the played sound matches with the user's answer
+        matchAnswerToPlayedSound(playedSound);
+    };
 
-    //Check if the sound played and user's answer match and react accordingly
+//Function that checks whether the played sound matches with the user's answer
+function matchAnswerToPlayedSound(playedSound){
+     let correspondingBtn = document.getElementById(answer);
     if(answer == playedSound){
         score++;
         scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCounter}`;
@@ -242,11 +345,8 @@ function checkBtnAnswer(e){
         audioPong.src = "music/fail.mp3";
         audioPong.play();
     }
-    
-    //After 1 second play another random sound
-    setTimeout(playRandomSound, 1000);
-
 }
+
 
 //setting keycodes for the user to submit answer with the keybaord
 function control(e){
