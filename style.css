@@ -15,8 +15,13 @@ body {
   overflow: hidden;
 }
 
+.new-high-score {
+  -webkit-animation: highScore 1s ease 0s 3;
+          animation: highScore 1s ease 0s 3;
+}
+
 .languages-container {
-  margin-bottom: 6em;
+  margin-bottom: 2em;
 }
 
 .languages-container .english,
@@ -118,6 +123,19 @@ body {
   font-size: 1.2em;
 }
 
+.game-over-container {
+  z-index: 2;
+  padding: 1em;
+  background-color: #396EB0;
+  margin-left: 2em;
+  width: 25%;
+  height: 20%;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 10px lightblue;
+          box-shadow: 0 0 10px lightblue;
+  font-size: 1.2em;
+}
+
 @-webkit-keyframes translateFinger {
   0% {
     -webkit-transform: translateX(0%);
@@ -175,6 +193,42 @@ body {
   100% {
     -webkit-transform: scale(1);
             transform: scale(1);
+  }
+}
+
+@-webkit-keyframes highScore {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    color: black;
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    color: yellow;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    color: black;
+  }
+}
+
+@keyframes highScore {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    color: black;
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    color: yellow;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    color: black;
   }
 }
 
@@ -282,7 +336,7 @@ body {
   }
   body .top-container .top-heading-container .top-heading {
     font-size: 1.5em;
-    margin-top: 1em;
+    margin-top: 2em;
   }
   body .top-container .top-heading-container .buttons-wrapper .score-display {
     font-size: 0.5em;
@@ -322,6 +376,12 @@ body {
     margin-top: 7em;
     width: 70%;
   }
+  body .instructions-and-nadav .game-over-container {
+    position: absolute;
+    width: 34%;
+    height: auto;
+    top: 13em;
+  }
 }
 
 @media all and (min-width: 362px) and (max-width: 376px) {
@@ -336,7 +396,7 @@ body {
   }
   body .top-container .top-heading-container .top-heading {
     font-size: 1.5em;
-    margin-top: 0;
+    margin-top: 1em;
   }
   body .top-container .top-heading-container .buttons-wrapper .score-display {
     font-size: 0.5em;
@@ -375,6 +435,12 @@ body {
     margin-top: 7em;
     width: 70%;
   }
+  body .instructions-and-nadav .game-over-container {
+    position: absolute;
+    width: 39%;
+    height: auto;
+    top: 12em;
+  }
 }
 
 @media all and (min-width: 321px) and (max-width: 361px) {
@@ -388,7 +454,7 @@ body {
   }
   body .top-container .top-heading-container .top-heading {
     font-size: 1.5em;
-    margin-top: 0 !important;
+    margin-top: 1em !important;
   }
   body .top-container .top-heading-container .buttons-wrapper .score-display {
     font-size: 0.5em;
@@ -427,6 +493,12 @@ body {
     margin-top: 7em;
     width: 70%;
   }
+  body .instructions-and-nadav .game-over-container {
+    position: absolute;
+    width: 39%;
+    height: auto;
+    top: 12em;
+  }
 }
 
 @media all and (min-width: 10px) and (max-width: 320px) {
@@ -440,7 +512,7 @@ body {
   }
   body .top-container .top-heading-container .top-heading {
     font-size: 1em !important;
-    margin-top: -1em;
+    margin-top: 0em;
   }
   body .top-container .top-heading-container .buttons-wrapper .score-display {
     font-size: 0.5em;
@@ -483,5 +555,11 @@ body {
   body .instructions-and-nadav .nadav-avatar {
     margin-top: 7em;
     width: 70%;
+  }
+  body .instructions-and-nadav .game-over-container {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 10em;
   }
 }
