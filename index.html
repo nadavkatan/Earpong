@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <div class="languages-and-highest-score-container d-flex justify-content-between">
     <div class="languages-container col-1">
         <button class='dutch btn'>Nederlands</button>
         <button class="english btn">English</button>
         <!-- <button class='hebrew btn'>Hebrew</button> -->
     </div>
+    <p class="highest-score-display my-3 mx-3">Your highest score is: <span class="highest-score"></span></p>
+</div>
    
-    <div class="top-container  row justify-content-end flex-column align-items-end mt-5 ">
+    <div class="top-container row justify-content-end flex-column align-items-end mt-5 ">
         <div class="top-heading-container row">
 
             <h1 class="top-heading text-center col-12 flex-column">Let's play EARPONG!</h1>
@@ -31,7 +33,9 @@
         </div>
 </div>
 
+</div>
 <div class="instructions-and-nadav row d-flex">
+   
     <img class="nadav-avatar col-6" src="images/neutral.png" alt="avatar">
     <div class="instructions-container col-6 d-flex flex-column align-items-center justify-content-center">
         <p class="instructions text-center text-white">
@@ -39,7 +43,7 @@
             I'm Nadav! your virtual ear-training teacher 🤓 <br>
             Our training will work like this: <br>
             I will play a sound, and you have to recognize which sound I have played. 
-            When you think you know which sound I played,<br> simply press the button 
+            When you think you know which sound I played, simply press the button 
             with the name of sound on it! <br>
             Are you ready?!
         </p>
@@ -56,6 +60,12 @@
     </div>
         <button class="close-instructions btn btn-warning w-50 d-none ">Play <span class="do-or-c"></span>!</button>
     </div>
+    <div class="game-over-container col-6 d-none flex-column align-items-center justify-content-center text-white">
+        <div class="result-container">
+            <p class="result"></p>
+            <button class="restart-btn btn btn-warning">Restart</button>
+        </div>
+   </div>
 </div>
     <audio class="audio-ping" src=""></audio>
     <audio class="audio-pong" src=""></audio>
