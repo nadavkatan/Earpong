@@ -13,9 +13,12 @@ body {
     background-position: 50% 60%;
     overflow: hidden;
 }
+.new-high-score{
+animation: highScore 1s ease 0s 3;
+}
 
 .languages-container {
-    margin-bottom: 6em;
+    margin-bottom: 2em;
 
     .english,
     .dutch {
@@ -25,6 +28,8 @@ body {
 
 .top-container {
     margin-right: 3em;
+        // background-image: url('images/board.png');
+
     .top-heading-container {
         .top-heading {
             margin-top: 0.5em;
@@ -101,7 +106,7 @@ body {
         z-index: 0;
     }
 
-    .instructions-container {
+    .instructions-container{
         z-index: 2;
         padding: 1em;
         background-color: #396EB0;
@@ -114,6 +119,17 @@ body {
     }
 }
 
+.game-over-container{
+    z-index: 2;
+    padding: 1em;
+    background-color: #396EB0;
+    margin-left: 2em;
+    width: 25%;
+    height: 20%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px lightblue;
+    font-size: 1.2em;
+} 
 
 //---Keyframes animation---//
 @keyframes translateFinger {
@@ -144,6 +160,21 @@ body {
         transform: scale(1);
     }
 
+}
+
+@keyframes highScore {
+    0%{
+        transform: scale(1);
+        color: black;
+    }
+    50%{
+        transform: scale(1.2);
+        color: yellow;
+    }
+    100%{
+        transform: scale(1);
+        color: black;
+    }
 }
 
 //---Media queries---//
@@ -281,7 +312,7 @@ body {
         .top-heading-container {
             .top-heading {
                 font-size: 1.5em;
-                margin-top: 1em;
+                margin-top: 2em;
             }
 
             .buttons-wrapper {
@@ -329,6 +360,12 @@ body {
             margin-top: 7em;
             width: 70%;
         }
+        .game-over-container{
+            position:absolute;
+            width: 34%;
+            height: auto;
+            top:13em;
+        }
     }
 }
 }
@@ -348,7 +385,7 @@ body {
         .top-heading-container {
             .top-heading {
                 font-size: 1.5em;
-                margin-top: 0;
+                margin-top: 1em;
             }
 
             .buttons-wrapper {
@@ -392,6 +429,12 @@ body {
         .nadav-avatar {
             margin-top: 7em;
             width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 39%;
+            height: auto;
+            top:12em;
         }
     }
 }
@@ -472,7 +515,7 @@ body {
         .top-heading-container {
             .top-heading {
                 font-size: 1.5em;
-                margin-top: 0 !important;
+                margin-top: 1em !important;
             }
 
             .buttons-wrapper {
@@ -518,6 +561,12 @@ body {
             margin-top: 7em;
             width: 70%;
         }
+        .game-over-container{
+            position:absolute;
+            width: 39%;
+            height: auto;
+            top:12em;
+        }
     }
 }
 }
@@ -534,7 +583,7 @@ body {
         .top-heading-container {
             .top-heading {
                 font-size: 1em !important;
-                margin-top: -1em;
+                margin-top: 0em;
             }
 
             .buttons-wrapper {
@@ -583,6 +632,12 @@ body {
         .nadav-avatar {
             margin-top: 7em;
             width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 50%;
+            height: auto;
+            top:10em;
         }
     }
 }
