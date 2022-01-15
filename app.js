@@ -358,7 +358,8 @@ function matchAnswerToPlayedSound(playedSound) {
         console.log('correct!');
         correspondingBtn.classList.remove('btn-blue');
         correspondingBtn.classList.add('btn-success');
-        audioPong.src = "music/success.mp3";
+//         audioPong.src = "music/success.mp3";
+        audioPong.src = `music/${answer}.mp3`;
         audioPong.play();
 
     } else {
@@ -366,7 +367,8 @@ function matchAnswerToPlayedSound(playedSound) {
         correspondingBtn.classList.remove('btn-blue');
         correspondingBtn.classList.add('btn-danger');
         teacher.src = 'images/angry.png';
-        audioPong.src = "music/fail.mp3";
+//         audioPong.src = "music/fail.mp3";
+        audioPong.src = `music/${answer}.mp3`;
         audioPong.play();
         mistakes++
         checkGameOver();
