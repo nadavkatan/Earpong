@@ -27,6 +27,7 @@ const result = document.querySelector('.result');
 const restartBtn = document.querySelector('.restart-btn');
 const highestScoreElement = document.querySelector('.highest-score');
 const highestScoreDisplay = document.querySelector('.highest-score-display');
+const changeNrOfNotesBtn = document.querySelector('.change-note-nr');
 let amountOfSounds = 3;
 let amountOfChromaticSounds = 1;
 let chromaticSelected = false;
@@ -54,8 +55,6 @@ scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCou
         window.localStorage.setItem("highest-score", '0');
       }
   })();
-
-//Display the current highest score
   let currentHighestScore = window.localStorage.getItem("highest-score");
   console.log(currentHighestScore);
   highestScoreElement.textContent = currentHighestScore;
@@ -66,7 +65,7 @@ function createSoundButtons(selectedSounds) {
         let soundBtn = document.createElement('button');
         soundBtn.textContent = selectedSounds[i];
         soundBtn.setAttribute('id', selectedSounds[i]);
-        soundBtn.classList.add('btn', 'btn-blue', 'mx-3', 'mt-3');
+        soundBtn.classList.add('btn', 'btn-blue', 'mx-3', 'mt-3', 'sound-button');
         soundButtons.push(soundBtn);
         btnContainer.appendChild(soundBtn);
     }
@@ -132,7 +131,9 @@ function createSoundChoiceButtons() {
             }
 
             //Proceeding to the next slide of the instructions - play C/Do
-            amountOfSoundsBtnContainer.remove();
+            // amountOfSoundsBtnContainer.remove();
+            amountOfSoundsBtnContainer.classList.remove('d-flex');
+            amountOfSoundsBtnContainer.classList.add('d-none');
             createSoundButtons(selectedSoundLang);
             amountOfSoundsFromUser.classList.remove('d-block');
             amountOfSoundsFromUser.classList.add('d-none');
@@ -178,8 +179,6 @@ function createChromaticButtons(selectedChromaticButtons) {
         btn.textContent = amountOfSounds;
         amountOfSoundsButtonElements.push(btn);
         amountOfSoundsBtnContainer.appendChild(btn);
-
-
     }
 }
 
@@ -193,7 +192,6 @@ function playCAndInitialize() {
     playSound.classList.add('d-block');
     setTimeout(initializeTraining, 2000);
 };
-
 
 
 //Close instructions container and point to strat training btn
@@ -294,7 +292,6 @@ function getPlayedSoundChromatic() {
     let sol = audioPingSplitClone.splice(audioPingSplitClone.length - 7, 3).join("");
 
     if (selectedSoundLang.includes('do')) {
-        // let audioPingSplit = audioPing.src.split("");
         let solSharp = audioPingSplitClone2.splice(audioPingSplitClone2.length - 8, 4).join("");
         //Check if diatonic sol
         if (sol == 'sol') {
@@ -358,7 +355,7 @@ function matchAnswerToPlayedSound(playedSound) {
         console.log('correct!');
         correspondingBtn.classList.remove('btn-blue');
         correspondingBtn.classList.add('btn-success');
-//         audioPong.src = "music/success.mp3";
+        // audioPong.src = "music/success.mp3";
         audioPong.src = `music/${answer}.mp3`;
         audioPong.play();
 
@@ -367,7 +364,7 @@ function matchAnswerToPlayedSound(playedSound) {
         correspondingBtn.classList.remove('btn-blue');
         correspondingBtn.classList.add('btn-danger');
         teacher.src = 'images/angry.png';
-//         audioPong.src = "music/fail.mp3";
+        // audioPong.src = "music/fail.mp3";
         audioPong.src = `music/${answer}.mp3`;
         audioPong.play();
         mistakes++
@@ -486,12 +483,22 @@ changeToEnglish.addEventListener('click', function () {
 //     createSoundButtons(soundsHeb);
 //     });
 
+
+//If the user made 5 mistakes, the game is over
 function checkGameOver() {
     if (mistakes === 5) {
         isGameOver = true;
         console.log(currentLanguage);
         gameOverContainer.classList.remove('d-none');
         gameOverContainer.classList.add('d-flex');
+
+        //removing eventListeners from the exercised sound buttons
+        let existingSoundBtns = document.querySelectorAll('.sound-button');
+        existingSoundBtns.forEach(soundBtn =>{
+            soundBtn.removeEventListener('click', checkBtnAnswer);
+        });
+
+        //Feedback according to score, modifyable between English and Dutch
         if (score < 5) {
             if (currentLanguage == 'english') {
                 result.innerHTML = `Game over<br>Your score is ${score}. Keep practicing!`;
@@ -516,13 +523,9 @@ function checkGameOver() {
     }
 }
 
+//restarting functionality after game over
 restartBtn.addEventListener('click', () => {
-    score = 0;
-    mistakes = 0;
-    questionsCounter = 0;
-    gameOverContainer.classList.remove('d-flex');
-    gameOverContainer.classList.add('d-none');
-
+    restart();
     instructionContainer.classList.remove('d-none');
     instructionContainer.classList.add('d-flex');
     playC.classList.remove('d-none');
@@ -533,9 +536,34 @@ restartBtn.addEventListener('click', () => {
     isGameOver = false;
 });
 
-//if user achieved highest score, store it in local storage and display it
+//Allow the user to change the number of exercised sounds after game over
+changeNrOfNotesBtn.addEventListener('click', ()=>{
+    restart();
+    instructionContainer.classList.remove('d-none');
+    instructionContainer.classList.add('d-flex');
+    playC.classList.remove('d-block');
+    playC.classList.add('d-none');
+    amountOfSoundsBtnContainer.classList.remove('d-none');
+    amountOfSoundsBtnContainer.classList.add('d-flex', 'flex-wrap', 'justify-content-center');
+    amountOfSoundsFromUser.classList.remove('d-none');
+    amountOfSoundsFromUser.classList.add('d-block');
+    closeInstructions.classList.remove('d-block');
+    closeInstructions.classList.add('d-none');
+    removeExistingSoundBtns();
+});
+
+//Resetting initial values for restarting game
+function restart(){
+    score = 0;
+    mistakes = 0;
+    questionsCounter = 0;
+    gameOverContainer.classList.remove('d-flex');
+    gameOverContainer.classList.add('d-none');
+    isGameOver = false;
+}
+
+//If the player reached a score higher than the one stored in localStorage, store the new high score
 function storeHighestScore(){
-    // let currentHighestScore = window.localStorage.score;
     if(score > currentHighestScore){
         window.localStorage.setItem("highest-score", score);
         highestScoreElement.textContent = score;
@@ -543,3 +571,10 @@ function storeHighestScore(){
     }
 }
 
+//Remove existing sound button for the user to modify the number of of sound buttons after game over
+function removeExistingSoundBtns(){
+    let existingSoundBtns = document.querySelectorAll('.sound-button');
+    existingSoundBtns.forEach(soundBtn=>{
+        soundBtn.remove();
+    });
+};
