@@ -34,7 +34,6 @@ let chromaticSelected = false;
 let amountOfSoundsButtonElements = [];
 let sounds = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
 let soundsIt = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
-let soundsHeb = ['סי', 'לה', 'סול', 'פה', 'מי', 'רה', 'דו'];
 let chromaticABC = ['a', 'a+', 'b', 'c', 'c+', 'd', 'd+', 'e', 'f', 'f+', 'g', 'g+'];
 let chromaticDoReMo = ['do', 'do+', 're', 're+', 'mi', 'fa', 'fa+', 'sol', 'sol+', 'la', 'la+', 'si'];
 let selectedSoundLang = [];
@@ -99,7 +98,7 @@ function nextInstruction() {
 // If user chooses 'ABC' - create ABC buttons and change dynamic text in play C section
 chooseABC.addEventListener('click', () => {
     nextInstruction();
-    selectedSoundLang = sounds;
+    selectedSoundLang = [...sounds];
     doOrC[0].textContent = "'C'";
     doOrC[1].textContent = "'C'";
 });
@@ -107,7 +106,7 @@ chooseABC.addEventListener('click', () => {
 // If user chooses 'DoReMi' - create DoReMi buttons and change dynamic text in play C section
 chooseDoReMi.addEventListener('click', () => {
     nextInstruction();
-    selectedSoundLang = soundsIt;
+    selectedSoundLang = [...soundsIt];
     doOrC[0].textContent = "'Do'";
     doOrC[1].textContent = "'Do'";
 });
@@ -170,7 +169,6 @@ function createSoundChoiceButtons() {
     });
 }
 
-
 function createChromaticButtons(selectedChromaticButtons) {
     for (let i = 0; i < selectedChromaticButtons.length; i++) {
         const btn = document.createElement('button');
@@ -208,7 +206,6 @@ function initializeTraining() {
 
 
 function playRandomSound() {
-
     //remove pointing finger
     pointingFinger.classList.remove('d-block');
     pointingFinger.classList.add('d-none');
@@ -233,7 +230,6 @@ function playRandomSound() {
             randomSound = chromaticABC[Math.floor(Math.random() * chromaticABC.length)];
             console.log(randomSound);
         }
-
         //If a chromatic option was not selected, create diatonic sounds
     } else {
         randomSound = selectedSoundLang[Math.floor(Math.random() * selectedSoundLang.length)];
@@ -276,7 +272,7 @@ function checkBtnAnswer(e) {
     }
     //After 1 second play another random sound
     if (!isGameOver) {
-        setTimeout(playRandomSound, 1000);
+        setTimeout(playRandomSound, 1500);
     }
 }
 
@@ -284,7 +280,6 @@ function checkBtnAnswer(e) {
 //Get played sound if chromaticSelected = true //
 function getPlayedSoundChromatic() {
     let audioPingSplit = audioPing.src.split("");
-    console.log(audioPingSplit);
     // clone audioPingSplit to splice it for 'sol' without modifying original
     let audioPingSplitClone = [...audioPingSplit];
     let audioPingSplitClone2 = [...audioPingSplit];
@@ -321,25 +316,27 @@ function getPlayedSoundChromatic() {
 //Get played sound if chromaticSelected = false //
 function getPlayedSoundDiatonic() {
     let audioPingSplit = audioPing.src.split("");
-    console.log(audioPingSplit);
     // clone audioPingSplit to splice it for 'sol' without modifying original
     let audioPingSplitClone = [...audioPingSplit];
     //Splicing for sol
     let sol = audioPingSplitClone.splice(audioPingSplitClone.length - 7, 3).join("");
     //Check whether user selected 'ABC'
-    if (selectedSoundLang == sounds) {
+    if (selectedSoundLang.includes('c')) {
         //Get and parse the source of the played sound
         var playedSound = audioPingSplit.splice(audioPingSplit.length - 5, 1).join("");
+        console.log(playedSound)
     }
     //Check if user selected 'DoReMi'
-    else if (selectedSoundLang == soundsIt) {
+    else if (selectedSoundLang.includes('do')) {
         let audioPingSplit = audioPing.src.split("");
         //Check if sol was played (sol is treated differently due to different char count (3 vs 2))
         if (sol == 'sol') {
             var playedSound = 'sol';
+            console.log(playedSound)
         } else {
             //If any other sounds was played
             var playedSound = audioPingSplit.splice(audioPingSplit.length - 6, 2).join("");
+            console.log(playedSound)
         }
     }
     //Check if the played sound matches with the user's answer
@@ -370,69 +367,9 @@ function matchAnswerToPlayedSound(playedSound) {
         mistakes++
         checkGameOver();
     }
+    console.log(answer);
 }
 
-
-//setting keycodes for the user to submit answer with the keybaord
-function control(e) {
-    if (e.keyCode === 65) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    } else if (e.keyCode === 66) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    } else if (e.keyCode === 66) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    } else if (e.keyCode === 67) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    } else if (e.keyCode === 68) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    } else if (e.keyCode === 69) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    } else if (e.keyCode === 70) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    } else if (e.keyCode === 71) {
-        let answer = e.key;
-        checkKeyAnswer(answer);
-        console.log(e.key);
-    }
-}
-
-//Check the user's answer submitted through the keyboard. Works the same as checkBtnAnswer()
-function checkKeyAnswer(answer) {
-    let audioPingSplit = audioPing.src.split("");
-    let playedSound = audioPingSplit.splice(audioPingSplit.length - 5, 1).join("");
-    let correspondingBtn = document.getElementById(answer);
-    if (answer == playedSound) {
-        score++;
-        scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCounter}`;
-        console.log('correct!');
-        correspondingBtn.classList.remove('btn-blue');
-        correspondingBtn.classList.add('btn-success');
-        audioPong.src = "music/success.mp3";
-        audioPong.play();
-    } else {
-        console.log('Wrong answer');
-        correspondingBtn.classList.remove('btn-blue');
-        correspondingBtn.classList.add('btn-danger');
-        teacher.src = "images/angry.png";
-        audioPong.src = "music/fail.mp3";
-        audioPong.play();
-    }
-    setTimeout(playRandomSound, 1000);
-}
 
 //Translate to Dutch
 changeToDutch.addEventListener('click', function () {
@@ -467,22 +404,6 @@ changeToEnglish.addEventListener('click', function () {
     amountOfSoundsFromUser.textContent = "How many sounds would you like your practice to consist?";
     highestScoreDisplay.innerHTML = `your highest score is: <span class="highest-score">${currentHighestScore}</span>`;
 });
-
-
-// changeToHebrew.addEventListener('click', function(){
-//     playSound.textContent = "!בוא נתחיל";
-//     instructions.innerHTML = `Earpong ברוך הבא ל <br>
-//     <br> 🤓 אני נדב, המורה הוירטואלי שלך לפיתוח שמיעה
-//     <br> האימון שלנו הולך לעבוד כך: אני אנגן צליל, ועליך יהיה לזהות את הצליל
-
-//     `;
-
-//     gotItBtn.textContent = "Snap ik!";
-//     chooseSoundsLang.remove();
-//     playC.innerHTML = `Nu, luister maar heel goed, de eerste noot dat ik ga spelen is: `;
-//     createSoundButtons(soundsHeb);
-//     });
-
 
 //If the user made 5 mistakes, the game is over
 function checkGameOver() {
@@ -539,6 +460,8 @@ restartBtn.addEventListener('click', () => {
 //Allow the user to change the number of exercised sounds after game over
 changeNrOfNotesBtn.addEventListener('click', ()=>{
     restart();
+    // selectedSoundLang=[];
+    selectedSoundLang.includes("do")? selectedSoundLang = [...soundsIt] : selectedSoundLang = [...sounds];
     instructionContainer.classList.remove('d-none');
     instructionContainer.classList.add('d-flex');
     playC.classList.remove('d-block');
