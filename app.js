@@ -214,7 +214,6 @@ function playRandomSound() {
 
     //Event listeners for buttons and keys are initialized only after 'start training' btn was pressed
     createEventListeners();
-    document.addEventListener('keydown', control);
 
     //Generate random sound
     let randomSound;
