@@ -399,10 +399,11 @@ body {
     margin-top: 1em;
   }
   body .top-container .top-heading-container .buttons-wrapper .score-display {
-    font-size: 0.5em;
+    font-size: 1em;
+    margin-bottom: -0.5em !important;
   }
   body .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
-    font-size: 0.5em;
+    font-size: 0.7em;
   }
   body .top-container .top-heading-container .buttons-wrapper .start-training-container {
     margin-top: 0.5em;
@@ -460,7 +461,7 @@ body {
     font-size: 0.5em;
   }
   body .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
-    font-size: 0.5em;
+    font-size: 1em;
   }
   body .top-container .top-heading-container .buttons-wrapper .start-training-container {
     margin: 0;
@@ -521,8 +522,8 @@ body {
   body .top-container .top-heading-container .buttons-wrapper .buttons-container {
     width: 20em;
   }
-  body .top-container .top-heading-container .buttons-wrapper .buttons-container .btn-blue {
-    font-size: 0.5em;
+  body .top-container .top-heading-container .buttons-wrapper .buttons-container .sound-button {
+    font-size: 1em;
   }
   body .top-container .top-heading-container .buttons-wrapper .start-training-container {
     margin-top: 0 !important;
