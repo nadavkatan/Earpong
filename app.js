@@ -1,3 +1,4 @@
+// Set initial variables //
 const topContainer = document.querySelector('.top-container');
 const btnContainer = document.querySelector('.buttons-container');
 btnContainer.classList.add('d-flex', 'justify-content-center', 'align-items-center', 'flex-wrap');
@@ -70,7 +71,7 @@ function createSoundButtons(selectedSounds) {
     }
 }
 
-//Proceed from initial instructions to language choice
+//Proceed from initial instructions to sound language choice
 gotItBtn.addEventListener('click', () => {
     instructions.classList.add('d-none');
     gotItBtn.classList.add('d-none');
@@ -81,7 +82,7 @@ gotItBtn.addEventListener('click', () => {
 });
 
 
-// declaring a slide transition to prevet code repeats. Proceeding from sound language choice to number of sounds choice
+// declaring a utility function for proceeding from sound language choice to number of sounds choice
 function nextInstruction() {
     chooseSoundsLang.classList.remove('d-block');
     chooseSoundsLang.classList.add('d-none');
@@ -93,7 +94,6 @@ function nextInstruction() {
     amountOfSoundsFromUser.classList.add('d-block');
     createSoundChoiceButtons();
 }
-
 
 // If user chooses 'ABC' - create ABC buttons and change dynamic text in play C section
 chooseABC.addEventListener('click', () => {
@@ -111,7 +111,7 @@ chooseDoReMi.addEventListener('click', () => {
     doOrC[1].textContent = "'Do'";
 });
 
-// Create buttons with numbers for the user to choose how many sounds should the training contain
+// Create buttons with numbers for the user to choose how many sounds should the training consist
 function createSoundChoiceButtons() {
 
     //Create the buttons
@@ -248,7 +248,7 @@ function playRandomSound() {
         soundButtons[i].classList.add('btn-blue');
     }
 
-    //set dynamic display of user score
+    //set dynamic score display
     questionsCounter++
     scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCounter}`;
 }
@@ -275,18 +275,15 @@ function checkBtnAnswer(e) {
     }
 }
 
-
 //Get played sound if chromaticSelected = true //
 function getPlayedSoundChromatic() {
     let audioPingSplit = audioPing.src.split("");
-    // clone audioPingSplit to splice it for 'sol' without modifying original
-    let audioPingSplitClone = [...audioPingSplit];
-    let audioPingSplitClone2 = [...audioPingSplit];
-    //Splicing for sol
-    let sol = audioPingSplitClone.splice(audioPingSplitClone.length - 7, 3).join("");
 
     if (selectedSoundLang.includes('do')) {
-        let solSharp = audioPingSplitClone2.splice(audioPingSplitClone2.length - 8, 4).join("");
+         //Slicing audioPingSplit for sol (since sol have a different char length than the other notes)
+        let sol = audioPingSplit.slice(audioPingSplit.length - 7, audioPingSplit.length - 4).join("");
+        //Slicing audioPingSplit for sol sharp (since sol sharp have a different char length than the other notes)
+        let solSharp = audioPingSplit.slice(audioPingSplit.length - 8, audioPingSplit.length -4).join("");
         //Check if diatonic sol
         if (sol == 'sol') {
             var playedSound = 'sol';
@@ -315,10 +312,7 @@ function getPlayedSoundChromatic() {
 //Get played sound if chromaticSelected = false //
 function getPlayedSoundDiatonic() {
     let audioPingSplit = audioPing.src.split("");
-    // clone audioPingSplit to splice it for 'sol' without modifying original
-    let audioPingSplitClone = [...audioPingSplit];
-    //Splicing for sol
-    let sol = audioPingSplitClone.splice(audioPingSplitClone.length - 7, 3).join("");
+
     //Check whether user selected 'ABC'
     if (selectedSoundLang.includes('c')) {
         //Get and parse the source of the played sound
@@ -327,7 +321,8 @@ function getPlayedSoundDiatonic() {
     }
     //Check if user selected 'DoReMi'
     else if (selectedSoundLang.includes('do')) {
-        let audioPingSplit = audioPing.src.split("");
+         //Slicing for sol
+        let sol = audioPingSplit.slice(audioPingSplit.length - 7, audioPingSplit.length - 4).join("");
         //Check if sol was played (sol is treated differently due to different char count (3 vs 2))
         if (sol == 'sol') {
             var playedSound = 'sol';
