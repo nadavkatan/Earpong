@@ -39,7 +39,11 @@ let chromaticABC = ['a', 'a+', 'b', 'c', 'c+', 'd', 'd+', 'e', 'f', 'f+', 'g', '
 let chromaticDoReMo = ['do', 'do+', 're', 're+', 'mi', 'fa', 'fa+', 'sol', 'sol+', 'la', 'la+', 'si'];
 let selectedSoundLang = [];
 let soundButtons = [];
-let randomSound = sounds[Math.floor(Math.random() * 7)];
+let randomSounds;
+let randomChromaticSounds;
+let prevRandomSound;
+// let randomSound = sounds[Math.floor(Math.random() * 7)];
+// let prevRandomSound;
 let cOrDo = 'C';
 let answer;
 score = 0;
@@ -59,6 +63,17 @@ scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCou
   console.log(currentHighestScore);
   highestScoreElement.textContent = currentHighestScore;
 
+  //Utility function to replace classes. It gets three arrays for argumnets: elements to which classes need to be changed, all the classes to be removed,
+  // and all the classes to be added.
+  function replaceClasses(element, remove, add){
+        for(let i = 0; i < remove.length; i++){
+            element.classList.remove(remove[i]);
+        }
+        for(let j = 0; j<add.length; j++){
+            element.classList.add(add[j]);
+        }
+  }
+
 //Declaring a function to create the buttons. To be called later
 function createSoundButtons(selectedSounds) {
     for (let i = 0; i < selectedSounds.length; i++) {
@@ -75,23 +90,17 @@ function createSoundButtons(selectedSounds) {
 gotItBtn.addEventListener('click', () => {
     instructions.classList.add('d-none');
     gotItBtn.classList.add('d-none');
-    chooseSoundsLang.classList.remove('d-none');
-    chooseSoundsLang.classList.add('d-block');
-    chooseSoundsLangContainer.classList.remove('d-none');
-    chooseSoundsLangContainer.classList.add('d-block');
+    replaceClasses(chooseSoundsLang, ['d-none'], ['d-block']);
+    replaceClasses(chooseSoundsLangContainer, ['d-none'], ['d-block']);
 });
 
 
 // declaring a utility function for proceeding from sound language choice to number of sounds choice
 function nextInstruction() {
-    chooseSoundsLang.classList.remove('d-block');
-    chooseSoundsLang.classList.add('d-none');
-    chooseSoundsLangContainer.classList.remove('d-block');
-    chooseSoundsLangContainer.classList.add('d-none');
-    amountOfSoundsBtnContainer.classList.remove('d-none');
-    amountOfSoundsBtnContainer.classList.add('d-flex', 'flex-wrap', 'justify-content-center');
-    amountOfSoundsFromUser.classList.remove('d-none');
-    amountOfSoundsFromUser.classList.add('d-block');
+    replaceClasses(chooseSoundsLang, ['d-block'], ['d-none']);
+    replaceClasses(chooseSoundsLangContainer, ['d-block'], ['d-none']);
+    replaceClasses(amountOfSoundsBtnContainer, ['d-none'], ['d-flex', 'flex-wrap', 'justify-content-center']);
+    replaceClasses(amountOfSoundsFromUser, ['d-none'], ['d-block']);
     createSoundChoiceButtons();
 }
 
@@ -128,18 +137,15 @@ function createSoundChoiceButtons() {
             for (let j = 0; j < 7 - Number(btn.textContent); j++) {
                 selectedSoundLang.pop();
             }
+            //Clone selectedSoundLang to prevent repating random sound
+             randomSounds = [...selectedSoundLang];
 
             //Proceeding to the next slide of the instructions - play C/Do
-            // amountOfSoundsBtnContainer.remove();
-            amountOfSoundsBtnContainer.classList.remove('d-flex');
-            amountOfSoundsBtnContainer.classList.add('d-none');
+            replaceClasses(amountOfSoundsBtnContainer, ['d-flex'], ['d-none']);
             createSoundButtons(selectedSoundLang);
-            amountOfSoundsFromUser.classList.remove('d-block');
-            amountOfSoundsFromUser.classList.add('d-none');
-            playC.classList.remove('d-none');
-            playC.classList.add('d-block');
-            closeInstructions.classList.remove('d-none');
-            closeInstructions.classList.add('d-block');
+            replaceClasses(amountOfSoundsFromUser, ['d-block'], ['d-none']);
+            replaceClasses(playC, ['d-none'], ['d-block']);
+            replaceClasses(closeInstructions, ['d-none'], ['d-block']);
         });
 
         //Counter for the button id and text content
@@ -153,17 +159,16 @@ function createSoundChoiceButtons() {
 
     chromaticOptionBtn.addEventListener('click', () => {
         amountOfSoundsBtnContainer.remove();
-        amountOfSoundsFromUser.classList.remove('d-block');
-        amountOfSoundsFromUser.classList.add('d-none');
-        playC.classList.remove('d-none');
-        playC.classList.add('d-block');
-        closeInstructions.classList.remove('d-none');
-        closeInstructions.classList.add('d-block');
+        replaceClasses(amountOfSoundsFromUser, ['d-block'], ['d-none']);
+        replaceClasses(playC, ['d-none'], ['d-block']);
+        replaceClasses(closeInstructions, ['d-none'], ['d-block']);
 
         if (selectedSoundLang.includes('do')) {
             createSoundButtons(chromaticDoReMo);
+            randomChromaticSounds = [...chromaticDoReMo];
         } else {
             createSoundButtons(chromaticABC);
+            randomChromaticSounds = [...chromaticABC];
         }
         chromaticSelected = true;
     });
@@ -186,18 +191,16 @@ closeInstructions.addEventListener('click', playCAndInitialize);
 function playCAndInitialize() {
     audioPing.src = 'music/c.mp3';
     audioPing.play();
-    playSound.classList.remove('d-none');
-    playSound.classList.add('d-block');
+    replaceClasses(playSound, ['d-none'], ['d-block']);
     setTimeout(initializeTraining, 2000);
 };
 
 
 //Close instructions container and point to strat training btn
 function initializeTraining() {
-    instructionContainer.classList.remove('d-flex');
-    instructionContainer.classList.add('d-none');
-    pointingFinger.classList.remove('d-none');
-    pointingFinger.classList.add('d-block');
+    replaceClasses(instructionContainer, ['d-flex'], ['d-none']);
+    replaceClasses(pointingFinger, ['d-none'], ['d-block']);
+
 
     //Start training
     playSound.addEventListener('click', playRandomSound);
@@ -207,32 +210,39 @@ function initializeTraining() {
 
 function playRandomSound() {
     //remove pointing finger
-    pointingFinger.classList.remove('d-block');
-    pointingFinger.classList.add('d-none');
-    playSound.classList.remove('d-block');
-    playSound.classList.add('d-none');
+    replaceClasses(pointingFinger, ['d-block'], ['d-none']);
+    replaceClasses(playSound, ['d-block'], ['d-none']);
 
     //Event listeners for buttons and keys are initialized only after 'start training' btn was pressed
     createEventListeners();
 
-    //Generate random sound
     let randomSound;
 
     // Check if the chromatic option was selected
     if (chromaticSelected) {
-        //Check if the DoReMi chromatic option was selected
-        if (selectedSoundLang.includes('do')) {
-            randomSound = chromaticDoReMo[Math.floor(Math.random() * chromaticDoReMo.length)];
-            console.log(randomSound);
-            //If not, it must be the ABC Chromatic option that was selected
-        } else {
-            randomSound = chromaticABC[Math.floor(Math.random() * chromaticABC.length)];
-            console.log(randomSound);
-        }
-        //If a chromatic option was not selected, create diatonic sounds
+        //remove the previous random note to prevent repetition
+        randomChromaticSounds.splice(randomChromaticSounds.indexOf(prevRandomSound), 1);
+        //generate a random note
+        randomSound = randomChromaticSounds[Math.floor(Math.random() * randomChromaticSounds.length)];
+        //Assign the previous note with the newly generated random note so it will not be generated in the next round
+        prevRandomSound = randomSound;
+
+        //Check if the DoReMi chromatic option was selected and restore the original clone
+        if (selectedSoundLang.includes('do'))randomChromaticSounds = [...chromaticDoReMo];
+
+        //If DoReMi chromatic option was not selected, it must be the ABC Chromatic option that was selected
+         else randomChromaticSounds = [...chromaticABC];
+        
+    //If a chromatic option was not selected, create diatonic sounds
     } else {
-        randomSound = selectedSoundLang[Math.floor(Math.random() * selectedSoundLang.length)];
-        console.log(randomSound);
+        //remove the previous random note to prevent repetition
+        randomSounds.splice(randomSounds.indexOf(prevRandomSound), 1);
+        //generate a random note
+        randomSound = randomSounds[Math.floor(Math.random() * randomSounds.length)];
+        //Assign the previous note with the newly generated random note so it will not be generated in the next round
+        prevRandomSound = randomSound;
+        //Restore the original clone
+        randomSounds = [...selectedSoundLang];
     }
 
     // set default avatar
@@ -344,16 +354,16 @@ function matchAnswerToPlayedSound(playedSound) {
         score++;
         scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCounter}`;
         console.log('correct!');
-        correspondingBtn.classList.remove('btn-blue');
-        correspondingBtn.classList.add('btn-success');
+        replaceClasses(correspondingBtn, ['btn-blue'], ['btn-success']);
         // audioPong.src = "music/success.mp3";
         audioPong.src = `music/${answer}.mp3`;
         audioPong.play();
 
     } else {
         console.log('Wrong answer');
-        correspondingBtn.classList.remove('btn-blue');
-        correspondingBtn.classList.add('btn-danger');
+        replaceClasses(correspondingBtn, ['btn-blue'], ['btn-danger']);
+        let correctBtn = document.getElementById(playedSound);
+        replaceClasses(correctBtn, ['btn-blue'], ['btn-success']);
         teacher.src = 'images/angry.png';
         // audioPong.src = "music/fail.mp3";
         audioPong.src = `music/${answer}.mp3`;
@@ -362,8 +372,8 @@ function matchAnswerToPlayedSound(playedSound) {
         checkGameOver();
     }
     console.log(answer);
+    
 }
-
 
 //Translate to Dutch
 changeToDutch.addEventListener('click', function () {
@@ -404,8 +414,9 @@ function checkGameOver() {
     if (mistakes === 5) {
         isGameOver = true;
         console.log(currentLanguage);
-        gameOverContainer.classList.remove('d-none');
-        gameOverContainer.classList.add('d-flex');
+        // gameOverContainer.classList.remove('d-none');
+        // gameOverContainer.classList.add('d-flex');
+        replaceClasses(gameOverContainer, ['d-none'], ['d-flex']);
 
         //removing eventListeners from the exercised sound buttons
         let existingSoundBtns = document.querySelectorAll('.sound-button');
@@ -441,12 +452,9 @@ function checkGameOver() {
 //restarting functionality after game over
 restartBtn.addEventListener('click', () => {
     restart();
-    instructionContainer.classList.remove('d-none');
-    instructionContainer.classList.add('d-flex');
-    playC.classList.remove('d-none');
-    playC.classList.add('d-block');
-    closeInstructions.classList.remove('d-none');
-    closeInstructions.classList.add('d-block');
+    replaceClasses(instructionContainer, ['d-none'], ['d-flex']);
+    replaceClasses(playC, ['d-none'], ['d-block']);
+    replaceClasses(closeInstructions, ['d-none'], ['d-block']);
     highestScoreDisplay.classList.remove('new-high-score');
     isGameOver = false;
 });
@@ -454,18 +462,12 @@ restartBtn.addEventListener('click', () => {
 //Allow the user to change the number of exercised sounds after game over
 changeNrOfNotesBtn.addEventListener('click', ()=>{
     restart();
-    // selectedSoundLang=[];
     selectedSoundLang.includes("do")? selectedSoundLang = [...soundsIt] : selectedSoundLang = [...sounds];
-    instructionContainer.classList.remove('d-none');
-    instructionContainer.classList.add('d-flex');
-    playC.classList.remove('d-block');
-    playC.classList.add('d-none');
-    amountOfSoundsBtnContainer.classList.remove('d-none');
-    amountOfSoundsBtnContainer.classList.add('d-flex', 'flex-wrap', 'justify-content-center');
-    amountOfSoundsFromUser.classList.remove('d-none');
-    amountOfSoundsFromUser.classList.add('d-block');
-    closeInstructions.classList.remove('d-block');
-    closeInstructions.classList.add('d-none');
+    replaceClasses(instructionContainer, ['d-none'], ['d-flex']);
+    replaceClasses(playC, ['d-block'], ['d-none']);
+    replaceClasses(amountOfSoundsBtnContainer, ['d-none'], ['d-flex', 'flex-wrap', 'justify-content-center']);
+    replaceClasses(amountOfSoundsFromUser, ['d-none'], ['d-block']);
+    replaceClasses(closeInstructions, ['d-block'], ['d-none']);
     removeExistingSoundBtns();
 });
 
@@ -474,8 +476,7 @@ function restart(){
     score = 0;
     mistakes = 0;
     questionsCounter = 0;
-    gameOverContainer.classList.remove('d-flex');
-    gameOverContainer.classList.add('d-none');
+    replaceClasses(gameOverContainer, ['d-flex'], ['d-none']);
     isGameOver = false;
 }
 
