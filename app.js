@@ -29,6 +29,7 @@ const restartBtn = document.querySelector('.restart-btn');
 const highestScoreElement = document.querySelector('.highest-score');
 const highestScoreDisplay = document.querySelector('.highest-score-display');
 const changeNrOfNotesBtn = document.querySelector('.change-note-nr');
+const fullScreenBtn = document.querySelector('.full-screen');
 let amountOfSounds = 3;
 let amountOfChromaticSounds = 1;
 let chromaticSelected = false;
@@ -496,3 +497,24 @@ function removeExistingSoundBtns(){
         soundBtn.remove();
     });
 };
+
+// fullScreenBtn.addEventListener('click', ()=>{
+//     if(!inFullScreen)elem.requestFullScreen();
+//     else elem.exitFullScreen();
+// });
+fullScreenBtn.addEventListener("click", function(){
+      toggleFullScreen();
+
+  }, false);
+
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        fullScreenBtn.textContent = "Exit Full Screen";
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        fullScreenBtn.textContent = "Full Screen";
+      }
+    }
+  }
