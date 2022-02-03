@@ -48,7 +48,7 @@ let randomSound;
 let prevRandomSound;
 let cOrDo = 'C';
 let answer;
-score = 0;
+let score = 0;
 let mistakes = 0;
 let isGameOver = false;
 let currentLanguage = 'english';
@@ -160,7 +160,8 @@ function createSoundChoiceButtons() {
     amountOfSoundsBtnContainer.appendChild(chromaticOptionBtn);
 
     chromaticOptionBtn.addEventListener('click', () => {
-        amountOfSoundsBtnContainer.remove();
+        // amountOfSoundsBtnContainer.remove();
+        replaceClasses(amountOfSoundsBtnContainer, ['d-flex'], ['d-none']);
         replaceClasses(amountOfSoundsFromUser, ['d-block'], ['d-none']);
         replaceClasses(playC, ['d-none'], ['d-block']);
         replaceClasses(closeInstructions, ['d-none'], ['d-bloTk']);
