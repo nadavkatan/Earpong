@@ -32,19 +32,20 @@ const changeNrOfNotesBtn = document.querySelector('.change-note-nr');
 const fullScreenBtn = document.querySelector('.full-screen');
 let amountOfSounds = 3;
 let amountOfChromaticSounds = 1;
-let chromaticSelected = false;
 let amountOfSoundsButtonElements = [];
 let sounds = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
 let soundsIt = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
 let chromaticABC = ['a', 'a+', 'b', 'c', 'c+', 'd', 'd+', 'e', 'f', 'f+', 'g', 'g+'];
-let chromaticDoReMo = ['do', 'do+', 're', 're+', 'mi', 'fa', 'fa+', 'sol', 'sol+', 'la', 'la+', 'si'];
+let chromaticABCText = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#'];
+let chromaticDoReMi = ['do', 'do+', 're', 're+', 'mi', 'fa', 'fa+', 'sol', 'sol+', 'la', 'la+', 'si'];
+let chromaticDoReMiText = ['do', 'do#', 're', 're#', 'mi', 'fa', 'fa#', 'sol', 'sol#', 'la', 'la#', 'si'];
 let selectedSoundLang = [];
 let soundButtons = [];
+let chromaticSelected = false;
 let randomSounds;
 let randomChromaticSounds;
+let randomSound;
 let prevRandomSound;
-// let randomSound = sounds[Math.floor(Math.random() * 7)];
-// let prevRandomSound;
 let cOrDo = 'C';
 let answer;
 score = 0;
@@ -58,28 +59,28 @@ scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCou
 (function () {
     if (window.localStorage.getItem("highest-score") === null) {
         window.localStorage.setItem("highest-score", '0');
-      }
-  })();
-  let currentHighestScore = window.localStorage.getItem("highest-score");
-  console.log(currentHighestScore);
-  highestScoreElement.textContent = currentHighestScore;
+    }
+})();
+let currentHighestScore = window.localStorage.getItem("highest-score");
+console.log(currentHighestScore);
+highestScoreElement.textContent = currentHighestScore;
 
-  //Utility function to replace classes. It gets three arrays for argumnets: elements to which classes need to be changed, all the classes to be removed,
-  // and all the classes to be added.
-  function replaceClasses(element, remove, add){
-        for(let i = 0; i < remove.length; i++){
-            element.classList.remove(remove[i]);
-        }
-        for(let j = 0; j<add.length; j++){
-            element.classList.add(add[j]);
-        }
-  }
+//Utility function to replace classes. It gets three arrays for argumnets: elements to which classes need to be changed, all the classes to be removed,
+// and all the classes to be added.
+function replaceClasses(element, remove, add) {
+    for (let i = 0; i < remove.length; i++) {
+        element.classList.remove(remove[i]);
+    }
+    for (let j = 0; j < add.length; j++) {
+        element.classList.add(add[j]);
+    }
+}
 
 //Declaring a function to create the buttons. To be called later
-function createSoundButtons(selectedSounds) {
+function createSoundButtons(selectedSounds, btnText) {
     for (let i = 0; i < selectedSounds.length; i++) {
         let soundBtn = document.createElement('button');
-        soundBtn.textContent = selectedSounds[i];
+        soundBtn.textContent = btnText[i];
         soundBtn.setAttribute('id', selectedSounds[i]);
         soundBtn.classList.add('btn', 'btn-blue', 'mx-3', 'mt-3', 'sound-button');
         soundButtons.push(soundBtn);
@@ -139,11 +140,11 @@ function createSoundChoiceButtons() {
                 selectedSoundLang.pop();
             }
             //Clone selectedSoundLang to prevent repating random sound
-             randomSounds = [...selectedSoundLang];
+            randomSounds = [...selectedSoundLang];
 
             //Proceeding to the next slide of the instructions - play C/Do
             replaceClasses(amountOfSoundsBtnContainer, ['d-flex'], ['d-none']);
-            createSoundButtons(selectedSoundLang);
+            createSoundButtons(selectedSoundLang,selectedSoundLang);
             replaceClasses(amountOfSoundsFromUser, ['d-block'], ['d-none']);
             replaceClasses(playC, ['d-none'], ['d-block']);
             replaceClasses(closeInstructions, ['d-none'], ['d-block']);
@@ -162,13 +163,13 @@ function createSoundChoiceButtons() {
         amountOfSoundsBtnContainer.remove();
         replaceClasses(amountOfSoundsFromUser, ['d-block'], ['d-none']);
         replaceClasses(playC, ['d-none'], ['d-block']);
-        replaceClasses(closeInstructions, ['d-none'], ['d-block']);
+        replaceClasses(closeInstructions, ['d-none'], ['d-bloTk']);
 
         if (selectedSoundLang.includes('do')) {
-            createSoundButtons(chromaticDoReMo);
-            randomChromaticSounds = [...chromaticDoReMo];
+            createSoundButtons(chromaticDoReMi, chromaticDoReMiText);
+            randomChromaticSounds = [...chromaticDoReMi];
         } else {
-            createSoundButtons(chromaticABC);
+            createSoundButtons(chromaticABC,chromaticABCText);
             randomChromaticSounds = [...chromaticABC];
         }
         chromaticSelected = true;
@@ -202,8 +203,7 @@ function initializeTraining() {
     replaceClasses(instructionContainer, ['d-flex'], ['d-none']);
     replaceClasses(pointingFinger, ['d-none'], ['d-block']);
 
-
-    //Start training
+    //Start the training
     playSound.addEventListener('click', playRandomSound);
     playSound.classList.add('scale-btn');
 };
@@ -217,8 +217,6 @@ function playRandomSound() {
     //Event listeners for buttons and keys are initialized only after 'start training' btn was pressed
     createEventListeners();
 
-    let randomSound;
-
     // Check if the chromatic option was selected
     if (chromaticSelected) {
         //remove the previous random note to prevent repetition
@@ -227,14 +225,13 @@ function playRandomSound() {
         randomSound = randomChromaticSounds[Math.floor(Math.random() * randomChromaticSounds.length)];
         //Assign the previous note with the newly generated random note so it will not be generated in the next round
         prevRandomSound = randomSound;
-
         //Check if the DoReMi chromatic option was selected and restore the original clone
-        if (selectedSoundLang.includes('do'))randomChromaticSounds = [...chromaticDoReMo];
+        if (selectedSoundLang.includes('do')) randomChromaticSounds = [...chromaticDoReMi];
 
         //If DoReMi chromatic option was not selected, it must be the ABC Chromatic option that was selected
-         else randomChromaticSounds = [...chromaticABC];
-        
-    //If a chromatic option was not selected, create diatonic sounds
+        else randomChromaticSounds = [...chromaticABC];
+
+        //If a chromatic option was not selected, create diatonic sounds
     } else {
         //remove the previous random note to prevent repetition
         randomSounds.splice(randomSounds.indexOf(prevRandomSound), 1);
@@ -273,85 +270,9 @@ function createEventListeners() {
 
 // Check user's answer submitted from buttons
 function checkBtnAnswer(e) {
-    answer = e.target.innerText;
-
-    if (chromaticSelected) {
-        getPlayedSoundChromatic();
-    } else {
-        getPlayedSoundDiatonic();
-    }
-    //After 1 second play another random sound
-    if (!isGameOver) {
-        setTimeout(playRandomSound, 1500);
-    }
-}
-
-//Get played sound if chromaticSelected = true //
-function getPlayedSoundChromatic() {
-    let audioPingSplit = audioPing.src.split("");
-
-    if (selectedSoundLang.includes('do')) {
-         //Slicing audioPingSplit for sol (since sol have a different char length than the other notes)
-        let sol = audioPingSplit.slice(audioPingSplit.length - 7, audioPingSplit.length - 4).join("");
-        //Slicing audioPingSplit for sol sharp (since sol sharp have a different char length than the other notes)
-        let solSharp = audioPingSplit.slice(audioPingSplit.length - 8, audioPingSplit.length -4).join("");
-        //Check if diatonic sol
-        if (sol == 'sol') {
-            var playedSound = 'sol';
-            //Check if chromatic sol
-        } else if (solSharp == 'sol+') {
-            var playedSound = 'sol+';
-            //Check if chromatic but not sol
-        } else if (audioPingSplit.includes('+')) {
-            var playedSound = audioPingSplit.splice(audioPingSplit.length - 7, 3).join("");
-            //check if diatonic but not sol
-        } else {
-            var playedSound = audioPingSplit.splice(audioPingSplit.length - 6, 2).join("");
-        }
-        //If selected language is not DoReMi, it's ABC. Get played sound.
-    } else {
-        if (audioPingSplit.includes('+')) {
-            var playedSound = audioPingSplit.splice(audioPingSplit.length - 6, 2).join("");
-        } else {
-            var playedSound = audioPingSplit.splice(audioPingSplit.length - 5, 1).join("");
-        }
-    }
-    //Check if the played sound matches with the user's answer
-    matchAnswerToPlayedSound(playedSound);
-};
-
-//Get played sound if chromaticSelected = false //
-function getPlayedSoundDiatonic() {
-    let audioPingSplit = audioPing.src.split("");
-
-    //Check whether user selected 'ABC'
-    if (selectedSoundLang.includes('c')) {
-        //Get and parse the source of the played sound
-        var playedSound = audioPingSplit.splice(audioPingSplit.length - 5, 1).join("");
-        console.log(playedSound)
-    }
-    //Check if user selected 'DoReMi'
-    else if (selectedSoundLang.includes('do')) {
-         //Slicing for sol
-        let sol = audioPingSplit.slice(audioPingSplit.length - 7, audioPingSplit.length - 4).join("");
-        //Check if sol was played (sol is treated differently due to different char count (3 vs 2))
-        if (sol == 'sol') {
-            var playedSound = 'sol';
-            console.log(playedSound)
-        } else {
-            //If any other sounds was played
-            var playedSound = audioPingSplit.splice(audioPingSplit.length - 6, 2).join("");
-            console.log(playedSound)
-        }
-    }
-    //Check if the played sound matches with the user's answer
-    matchAnswerToPlayedSound(playedSound);
-};
-
-//Function that checks whether the played sound matches with the user's answer
-function matchAnswerToPlayedSound(playedSound) {
+    answer = e.target.id;
     let correspondingBtn = document.getElementById(answer);
-    if (answer == playedSound) {
+    if (answer == randomSound) {
         score++;
         scoreDisplay.textContent = `You recognized ${score} sounds out of ${questionsCounter}`;
         console.log('correct!');
@@ -363,7 +284,7 @@ function matchAnswerToPlayedSound(playedSound) {
     } else {
         console.log('Wrong answer');
         replaceClasses(correspondingBtn, ['btn-blue'], ['btn-danger']);
-        let correctBtn = document.getElementById(playedSound);
+        let correctBtn = document.getElementById(randomSound);
         replaceClasses(correctBtn, ['btn-blue'], ['btn-success']);
         teacher.src = 'images/angry.png';
         // audioPong.src = "music/fail.mp3";
@@ -373,8 +294,13 @@ function matchAnswerToPlayedSound(playedSound) {
         checkGameOver();
     }
     console.log(answer);
-    
+
+    //After 1 second play another random sound
+    if (!isGameOver) {
+        setTimeout(playRandomSound, 1500);
+    }
 }
+
 
 //Translate to Dutch
 changeToDutch.addEventListener('click', function () {
@@ -415,13 +341,11 @@ function checkGameOver() {
     if (mistakes === 5) {
         isGameOver = true;
         console.log(currentLanguage);
-        // gameOverContainer.classList.remove('d-none');
-        // gameOverContainer.classList.add('d-flex');
         replaceClasses(gameOverContainer, ['d-none'], ['d-flex']);
 
         //removing eventListeners from the exercised sound buttons
         let existingSoundBtns = document.querySelectorAll('.sound-button');
-        existingSoundBtns.forEach(soundBtn =>{
+        existingSoundBtns.forEach(soundBtn => {
             soundBtn.removeEventListener('click', checkBtnAnswer);
         });
 
@@ -461,9 +385,9 @@ restartBtn.addEventListener('click', () => {
 });
 
 //Allow the user to change the number of exercised sounds after game over
-changeNrOfNotesBtn.addEventListener('click', ()=>{
+changeNrOfNotesBtn.addEventListener('click', () => {
     restart();
-    selectedSoundLang.includes("do")? selectedSoundLang = [...soundsIt] : selectedSoundLang = [...sounds];
+    selectedSoundLang.includes("do") ? selectedSoundLang = [...soundsIt] : selectedSoundLang = [...sounds];
     replaceClasses(instructionContainer, ['d-none'], ['d-flex']);
     replaceClasses(playC, ['d-block'], ['d-none']);
     replaceClasses(amountOfSoundsBtnContainer, ['d-none'], ['d-flex', 'flex-wrap', 'justify-content-center']);
@@ -473,7 +397,7 @@ changeNrOfNotesBtn.addEventListener('click', ()=>{
 });
 
 //Resetting initial values for restarting game
-function restart(){
+function restart() {
     score = 0;
     mistakes = 0;
     questionsCounter = 0;
@@ -482,8 +406,8 @@ function restart(){
 }
 
 //If the player reached a score higher than the one stored in localStorage, store the new high score
-function storeHighestScore(){
-    if(score > currentHighestScore){
+function storeHighestScore() {
+    if (score > currentHighestScore) {
         window.localStorage.setItem("highest-score", score);
         highestScoreElement.textContent = score;
         highestScoreDisplay.classList.add('new-high-score');
@@ -491,30 +415,26 @@ function storeHighestScore(){
 }
 
 //Remove existing sound button for the user to modify the number of of sound buttons after game over
-function removeExistingSoundBtns(){
+function removeExistingSoundBtns() {
     let existingSoundBtns = document.querySelectorAll('.sound-button');
-    existingSoundBtns.forEach(soundBtn=>{
+    existingSoundBtns.forEach(soundBtn => {
         soundBtn.remove();
     });
 };
 
-// fullScreenBtn.addEventListener('click', ()=>{
-//     if(!inFullScreen)elem.requestFullScreen();
-//     else elem.exitFullScreen();
-// });
-fullScreenBtn.addEventListener("click", function(){
-      toggleFullScreen();
+fullScreenBtn.addEventListener("click", function () {
+    toggleFullScreen();
 
-  }, false);
+}, false);
 
-  function toggleFullScreen() {
+function toggleFullScreen() {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
         fullScreenBtn.textContent = "Exit Full Screen";
     } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-        fullScreenBtn.textContent = "Full Screen";
-      }
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+            fullScreenBtn.textContent = "Full Screen";
+        }
     }
-  }
+}
