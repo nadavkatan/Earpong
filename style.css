@@ -467,6 +467,9 @@ body {
     margin-left: 6em;
     margin-top: 0 !important;
   }
+  .game-over-container {
+    width: 90%;
+  }
 }
 
 @media all and (min-width: 392px) and (max-width: 415px) {
@@ -523,7 +526,7 @@ body {
   }
   body .instructions-and-nadav .game-over-container {
     position: absolute;
-    width: 34%;
+    width: 90%;
     height: auto;
     top: 13em;
   }
@@ -583,7 +586,7 @@ body {
   }
   body .instructions-and-nadav .game-over-container {
     position: absolute;
-    width: 34%;
+    width: 90%;
     height: auto;
     top: 13em;
   }
@@ -646,7 +649,7 @@ body {
   }
   body .instructions-and-nadav .game-over-container {
     position: absolute;
-    width: 39%;
+    width: 90%;
     height: auto;
     top: 12em;
   }
@@ -710,7 +713,7 @@ body {
   }
   body .instructions-and-nadav .game-over-container {
     position: absolute;
-    width: 39%;
+    width: 90%;
     height: auto;
     top: 12em;
   }
@@ -774,7 +777,7 @@ body {
   }
   body .instructions-and-nadav .game-over-container {
     position: absolute;
-    width: 39%;
+    width: 90%;
     height: auto;
     top: 12em;
   }
@@ -836,7 +839,7 @@ body {
   }
   body .instructions-and-nadav .game-over-container {
     position: absolute;
-    width: 39%;
+    width: 90%;
     height: auto;
     top: 12em;
   }
@@ -900,7 +903,7 @@ body {
   }
   body .instructions-and-nadav .game-over-container {
     position: absolute;
-    width: 50%;
+    width: 90%;
     height: auto;
     top: 10em;
   }
