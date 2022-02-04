@@ -1,105 +1,818 @@
 
-@media all and (max-width:769){
+@media screen and (min-width: 1026px) and (max-width: 1200px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    .instructions-and-nadav {
+        margin-top: -6em;
 
-    .buttons-wrapper{
-        height: 22vh;
-        width: 99vw;
+        .instructions-container {
+            width: 38%;
+
+            // margin-top: 3em;
+            .instructions {
+                font-size: 1em;
+            }
+        }
+        .nadav-avatar {
+            margin-left: -3em;
+            width: 40%;
+            margin-top: 0.2em;
+        }
+    }
+
+    .top-container {
+        margin-top: 1em!important;
+        .top-heading-container {
+            .top-heading {
+                margin-top: 0!important;
+                font-size: 2em;
+            }
+
+            .buttons-wrapper {
+                height: 22vh;
+                width: 99vw;
+                // .score-display{
+                //     font-size: 1.5em;
+                // }
+                .buttons-container {
+                    // margin-top: 2.5em;
+
+                    .btn {
+                        font-size: 1em !important;
+                    }
+                }
+
+                .start-training-container {
+                    margin-top: 6em;
+                    margin-left: 19em;
+
+                    .finger {
+                        top: 2em;
+                        left: 2em;
+                    }
+
+                    .play-sound {
+                        margin-left: 6em;
+                        margin-top: 0 !important;
+                        font-size: 1.5em !important;
+                    }
+                }
+            }
+        }
     }
 }
-.instructions-container{
-    width: 80%;
-    right:4.5em;
-    top:38em;
 }
-.top-container{
-    flex-direction: column;
-    align-items: center;
 
-    .nadav-avatar{
-        margin-top: 2em;
-        width: 58%;
+
+//iPad Pro
+@media screen and (min-width:914px) and (max-width: 1025px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    .instructions-and-nadav {
+        // margin-top: -6em;
+
+        .instructions-container {
+            width: 47%;
+
+            // margin-top: 3em;
+            .instructions {
+                font-size: 1.5em;
+            }
+        }
+
+        .nadav-avatar {
+            margin-left: -3em;
+            width: 50%;
+            margin-top: 0.2em;
+        }
     }
 
-    .finger{
-        left: 13em;
-        top: 12.5em;
-    }
-    .play-sound{
-        margin-left: 6em;
+    .top-container {
         margin-top: 0!important;
+        .top-heading-container {
+            .top-heading {
+                margin-top: 4em;
+                font-size: 4em;
+            }
+
+            .buttons-wrapper {
+                height: 22vh;
+                width: 99vw;
+                .score-display{
+                    font-size: 1.5em;
+                }
+                .buttons-container {
+                    margin-top: 2.5em;
+
+                    .sound-button {
+                        font-size: 1.6em;
+                    }
+                }
+
+                .start-training-container {
+                    margin-top: 6em;
+                    margin-left: 19em;
+
+                    .finger {
+                        top: 2em;
+                        left: 2em;
+                    }
+
+                    .play-sound {
+                        margin-left: 6em;
+                        margin-top: 0 !important;
+                        font-size: 1.5em !important;
+                    }
+                }
+            }
+        }
     }
 }
-
-@media all and (min-width: 373px) and (max-width:415px){
-
-    .buttons-wrapper{
-        height: 22vh;
-        width: 99vw;
-    }
-.instructions-container{
-    width: 100%;
-    right:0;
-    top:17em;
 }
-.top-container{
-    flex-direction: column;
-    align-items: center;
 
-    .nadav-avatar{
-        margin-top: 2em;
-        width: 58%;
+//surface Pro 7
+@media screen and (min-width:771px) and (max-width: 913px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    .instructions-and-nadav {
+        // margin-top: -6em;
+
+        .instructions-container {
+            width: 47%;
+
+            // margin-top: 3em;
+            .instructions {
+                font-size: 1.2em;
+            }
+        }
+
+        .nadav-avatar {
+            margin-left: -3em;
+            width: 50%;
+            margin-top: 0.2em;
+        }
     }
 
-    .finger{
-        left: 3em;
-        top: 13.5em;
-    }
-    .play-sound{
-        margin-left: 6em;
+    .top-container {
         margin-top: 0!important;
+        .top-heading-container {
+            .top-heading {
+                margin-top: 4.2em;
+                font-size: 3em;
+            }
+
+            .buttons-wrapper {
+                height: 22vh;
+                width: 99vw;
+                .score-display{
+                    font-size: 1.5em;
+                }
+                .buttons-container {
+                    margin-top: 2.5em;
+
+                    .btn {
+                        font-size: 1.3em !important;
+                    }
+                }
+
+                .start-training-container {
+                    margin-top: 6em;
+                    margin-left: 19em;
+
+                    .finger {
+                        top: 2em;
+                        left: 2em;
+                    }
+
+                    .play-sound {
+                        margin-left: 6em;
+                        margin-top: 0 !important;
+                        font-size: 1.5em !important;
+                    }
+                }
+            }
+        }
     }
-}
-.top-heading{
-    font-size: 2.5em;
-    // margin-top: 0.6em!important;
 }
 }
 
+//iPad
+@media all and (min-width: 542px) and (max-width:770px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .instructions-and-nadav {
+        margin-top: 0;
 
-@media all and (max-width:375px) {
-    .instructions-container{
-        width: 100%;
-        right:0;
-        top: 9em!important;;
-    }
-    .top-heading{
-        font-size: 2.5em;
-        // margin-top: 0.6em!important;
+        .instructions-container {
+            width: 40%;
+            .instructions{
+                font-size: 1em !important;
+            }
+        }
+
+        .nadav-avatar {
+            // margin-left: -3em;
+            margin-top: 0!important;
+            width: 50%;
+        }
     }
 
-    .top-container{
+    .top-container {
+        margin-right:0;
+        .top-heading-container {
+            .top-heading {
+                margin-top: 2.5em;
+                font-size: 3em;
+            }
+
+            .buttons-wrapper {
+                height: 22vh;
+                width: 99vw;
+
+                .buttons-container {
+                    // margin-top: 1.5em;
+                }
+
+                .start-training-container {
+                    margin-top: 3em;
+                    margin-left: 18em;
+
+                    .finger {
+                        top: 1em;
+                        left: -1em;
+                    }
+
+                    .play-sound {
+                        margin-left: 6em;
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+}
+//Surface duo
+@media all and (min-width: 416px) and (max-width:541px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .instructions-and-nadav {
+        margin-top: 0;
+
+        .instructions-container {
+            width: 49%;
+            margin-left:-1em;
+            .instructions{
+                font-size: 0.8em !important;
+            }
+        }
+
+        .nadav-avatar {
+            // margin-left: -3em;
+            margin-top: 0!important;
+            width: 43%;
+        }
+    }
+
+    .top-container {
+        margin-right:0;
+        .top-heading-container {
+            .top-heading {
+                margin-top: 1em;
+                font-size: 2em;
+            }
+
+            .buttons-wrapper {
+                height: 22vh;
+                width: 99vw;
+
+                .buttons-container {
+                    // margin-top: 1.5em;
+                }
+
+                .start-training-container {
+                    margin-top: 3em;
+                    margin-left: 16em;
+
+                    .finger {
+                        top: 1em;
+                        left: -1em;
+                    }
+
+                    .play-sound {
+                        margin-left: 6em;
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+}
+
+//iGalaxy s20 Ultra
+@media all and (min-width: 392px) and (max-width:415px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .top-container {
+        margin-left: 0;
+        margin-right: 0;
+        .top-heading-container {
+            .top-heading {
+                font-size: 1.5em;
+                margin-top: 4em;
+            }
+
+            .buttons-wrapper {
+                .score-display {
+                    font-size: 1em;
+                }
+
+                .buttons-container {
+                    .btn-blue {
+                        font-size: 0.8em;
+                    }
+                }
+            }
+
+            .start-training-container {
+                margin-top: 0 !important;
+
+                .finger {
+                    left: 1.5em;
+                    top: 4em !important;
+                }
+
+                .play-sound {
+                    margin-left: 9em !important;
+                    margin-top: 3em !important;
+                }
+            }
+        }
+
+
+    }
+
+    .instructions-and-nadav {
+        display: flex;
         flex-direction: column;
         align-items: center;
 
-        .finger{
-            left: 3em;
-            top: 15.5em!important;
+        .instructions-container {
+            margin-left: 1.3em;
+            margin-top: -32em;
+            width: 90%;
         }
-        .play-sound{
-            margin-left: 6em;
-            margin-top: 0!important;
+
+        .nadav-avatar {
+            margin-top: 7em;
+            margin-left: 4em;
+            width: 70%;
         }
-        .nadav-avatar{
-            margin-top: 2em;
-            width: 58%;
+        .game-over-container{
+            position:absolute;
+            width: 34%;
+            height: auto;
+            top:13em;
+        }
+    }
+}
+}
+
+//iGalaxy s20 Ultra
+@media all and (min-width: 392px) and (max-width:415px) and (max-height:737px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .top-container {
+        margin-left: 0;
+        margin-right: 0;
+        .top-heading-container {
+            .top-heading {
+                font-size: 1.5em;
+                margin-top: 1.5em;
+            }
+
+            .buttons-wrapper {
+                .score-display {
+                    font-size: 1em;
+                }
+
+                .buttons-container {
+                    .btn-blue {
+                        font-size: 0.8em;
+                    }
+                }
+            }
+
+            .start-training-container {
+                margin-top: -2em!important;
+
+                .finger {
+                    left: 1.5em;
+                    top: 4em !important;
+                }
+
+                .play-sound {
+                    margin-left: 9em !important;
+                    margin-top: 3em !important;
+                }
+            }
+        }
+
+
+    }
+
+    .instructions-and-nadav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .instructions-container {
+            margin-left: 1.3em;
+            margin-top: -32em;
+            width: 90%;
+        }
+
+        .nadav-avatar {
+            margin-top: 7em;
+            margin-left: 4em;
+            width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 34%;
+            height: auto;
+            top:13em;
+        }
+    }
+}
+}
+
+
+
+//iPhone 6/7/8/ 12 pro
+@media all and (min-width:377px) and (max-width:391px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .top-container {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+        .top-heading-container {
+            .top-heading {
+                font-size: 1.5em;
+                margin-top: 3em;
+            }
+
+            .buttons-wrapper {
+                .score-display {
+                    font-size: 1em;
+                    margin-bottom: -0.5em!important;
+                }
+
+                .buttons-container {
+                    margin-top: 0.5em!important;
+                    .btn-blue {
+                        font-size: 1em;
+                    }
+                }
+
+                .start-training-container {
+                    margin-top: 0.5em;
+
+                    .finger {
+                        left: 1.5em;
+                        top: 3em !important;
+                    }
+
+                    .play-sound {
+                        margin-left: 8em;
+                    }
+                }
+            }
         }
     }
 
-    .buttons-wrapper{
-        height:18vh;
+    .instructions-and-nadav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-        // .buttons-container{
-        //     flex-wrap: wrap;
-        // }
+        .instructions-container {
+            margin-left: 1.3em;
+            margin-top: -25em;
+            width: 90%;
+        }
+
+        .nadav-avatar {
+            margin-top: 7em;
+            width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 39%;
+            height: auto;
+            top:12em;
+        }
     }
+}
+}
+
+// iPhone SE
+@media all and (min-width:362px) and (max-width:376px) and (max-height: 667px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .top-container {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+        .top-heading-container {
+            .top-heading {
+                font-size: 1.5em;
+                margin-top: 1em;
+            }
+
+            .buttons-wrapper {
+                .score-display {
+                    font-size: 1em;
+                    margin-bottom: -0.5em!important;
+                }
+
+                .buttons-container {
+                    margin-top: 0.5em!important;
+                    .btn-blue {
+                        font-size: 0.7em;
+                    }
+                }
+
+                .start-training-container {
+                    margin-top: -0.5em;
+
+                    .finger {
+                        left: 1.5em;
+                        top: 3em !important;
+                    }
+
+                    .play-sound {
+                        margin-left: 8em;
+                    }
+                }
+            }
+        }
+    }
+
+    .instructions-and-nadav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .instructions-container {
+            margin-left: 1.3em;
+            margin-top: -24.5em;
+            width: 90%;
+        }
+
+        .nadav-avatar {
+            margin-top: 7em;
+            margin-left: 4em;
+            width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 39%;
+            height: auto;
+            top:12em;
+        }
+    }
+}
+}
+
+//iPhone x
+@media all and (min-width:362px) and (max-width:376px) and (min-height:668px) and (max-height: 813px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .top-container {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+        .top-heading-container {
+            .top-heading {
+                font-size: 1.5em;
+                margin-top: 2.5em;
+            }
+
+            .buttons-wrapper {
+                .score-display {
+                    font-size: 1em;
+                    margin-bottom: -0.5em!important;
+                }
+
+                .buttons-container {
+                    margin-top: 0.5em!important;
+                    .btn-blue {
+                        font-size: 1em;
+                    }
+                }
+
+                .start-training-container {
+                    margin-top: -0.5em;
+
+                    .finger {
+                        left: 1.5em;
+                        top: 3em !important;
+                    }
+
+                    .play-sound {
+                        margin-left: 8em;
+                    }
+                }
+            }
+        }
+    }
+
+    .instructions-and-nadav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .instructions-container {
+            margin-left: 1.3em;
+            margin-top: -24.5em;
+            width: 90%;
+        }
+
+        .nadav-avatar {
+            margin-top: 7em;
+            margin-left: 4em;
+            width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 39%;
+            height: auto;
+            top:12em;
+        }
+    }
+}
+}
+
+
+//Galaxy s8+
+@media all and (min-width: 321px) and (max-width:361px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .top-container {
+        margin-left: 0;
+        margin-right: 0;
+        .top-heading-container {
+            .top-heading {
+                font-size: 1.5em;
+                margin-top: 2em !important;
+            }
+
+            .buttons-wrapper {
+                .score-display {
+                    font-size: 1em;
+                }
+
+                .buttons-container {
+                    width: 22em;
+                    .btn-blue {
+                        font-size: 0.7em;
+                    }
+                }
+
+                .start-training-container {
+                    margin: 0;
+
+                    .finger {
+                        left: 1.5em;
+                        top: 3em !important;
+                    }
+
+                    .play-sound {
+                        margin-left: 9em;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .instructions-and-nadav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .instructions-container {
+            margin-left: 1.3em;
+            margin-top: -24em;
+            width: 90%;
+        }
+
+        .nadav-avatar {
+            margin-top: 7em;
+            margin-left: 3em;
+            width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 39%;
+            height: auto;
+            top:12em;
+        }
+    }
+}
+}
+
+//iPhone SE
+@media all and (min-width:10px) and (max-width: 320px){
+    body{
+        background-size: 200% 110%;
+        background-position: 44% 60%;
+    
+    .top-container {
+        margin-left: 0;
+        margin-right:0;
+        .top-heading-container {
+            .top-heading {
+                font-size: 1.3em !important;
+                margin-top: 1em;
+            }
+
+            .buttons-wrapper {
+                .score-display {
+                    font-size: 0.8em;
+                    margin-bottom: 0!important;
+                }
+
+                .buttons-container {
+                    width: 18em;
+
+                    .sound-button {
+                        font-size: 0.6em;
+                    }
+                }
+
+                .start-training-container {
+                    margin-top: 0 !important;
+
+                    .finger {
+                        left: 1.5em;
+                        top: 2em !important;
+                    }
+
+                    .play-sound {
+                        margin-left: 7em;
+                        margin-top: 1em !important;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .instructions-and-nadav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .instructions-container {
+            margin-left: 1em;
+            margin-top: -26em;
+            width: 90%;
+        }
+
+        .nadav-avatar {
+            margin-top: 9em;
+            margin-left: 3em;
+            width: 70%;
+        }
+        .game-over-container{
+            position:absolute;
+            width: 50%;
+            height: auto;
+            top:10em;
+        }
+    }
+}
 }

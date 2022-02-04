@@ -160,7 +160,6 @@ function createSoundChoiceButtons() {
     amountOfSoundsBtnContainer.appendChild(chromaticOptionBtn);
 
     chromaticOptionBtn.addEventListener('click', () => {
-        // amountOfSoundsBtnContainer.remove();
         replaceClasses(amountOfSoundsBtnContainer, ['d-flex'], ['d-none']);
         replaceClasses(amountOfSoundsFromUser, ['d-block'], ['d-none']);
         replaceClasses(playC, ['d-none'], ['d-block']);
@@ -423,19 +422,19 @@ function removeExistingSoundBtns() {
     });
 };
 
-fullScreenBtn.addEventListener("click", function () {
-    toggleFullScreen();
+// fullScreenBtn.addEventListener("click", function () {
+//     toggleFullScreen();
 
-}, false);
+// }, false);
 
-function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-        fullScreenBtn.textContent = "Exit Full Screen";
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-            fullScreenBtn.textContent = "Full Screen";
-        }
-    }
-}
+// function toggleFullScreen() {
+//     if (!document.fullscreenElement) {
+//         document.documentElement.requestFullscreen();
+//         fullScreenBtn.textContent = "Exit Full Screen";
+//     } else {
+//         if (document.exitFullscreen) {
+//             document.exitFullscreen();
+//             fullScreenBtn.textContent = "Full Screen";
+//         }
+//     }
+// }
