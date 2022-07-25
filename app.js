@@ -139,6 +139,7 @@ function createSoundChoiceButtons() {
             for (let j = 0; j < 7 - Number(btn.textContent); j++) {
                 selectedSoundLang.pop();
             }
+            chromaticSelected = false;
             //Clone selectedSoundLang to prevent repating random sound
             randomSounds = [...selectedSoundLang];
 
